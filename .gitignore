@@ -1,0 +1,11 @@
+# dependências
+node_modules/
+
+# vídeos brutos (pesados demais para o GitHub)
+identidade/videos-05-10/
+
+# ferramentas
+.firebase/
+.vercel/
+.impeccable/hook.cache.json
+*.log

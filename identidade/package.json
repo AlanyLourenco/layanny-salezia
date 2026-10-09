@@ -1,0 +1,15 @@
+{
+  "name": "layanny-salezia-identidade",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Identidade visual Layanny Salezia Confeitaria",
+  "scripts": {
+    "shot": "node scripts/shot.js",
+    "export:png": "node scripts/export-png.js",
+    "export:video": "node scripts/export-video.js",
+    "vetorizar": "python scripts/vetorizar-logo.py \"refs/Orçamento brownie - Sophia.png\""
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

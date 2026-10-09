@@ -1,0 +1,102 @@
+/* Estilo do app de pedidos. Cores e fontes vêm de marca/tokens.css (cópia de identidade/). */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100dvh;
+  background: var(--creme); color: var(--tinta-app);
+  font: 400 16px/1.5 var(--fonte-texto);
+  -webkit-font-smoothing: antialiased;
+}
+:root {
+  --tinta-app: #4A2328;            /* texto corrido: escuro e quente, lê bem no sol */
+  --suave: #7A5A57;
+  --linha: color-mix(in srgb, var(--principal) 16%, transparent);
+  --sombra: 0 10px 30px -18px rgba(64, 20, 28, .45);
+  --ok: #3F7D4E;
+  --alerta: #B4472F;
+  --raio: 18px;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+img { display: block; max-width: 100%; }
+h1, h2, h3 { font-family: var(--fonte-titulo); font-weight: 400; line-height: 1.1; margin: 0; color: var(--principal); }
+[hidden] { display: none !important; }
+.wrap { width: min(640px, 100%); margin-inline: auto; padding-inline: 16px; }
+.script { font-family: var(--fonte-assinatura); font-weight: 400; }
+.suave { color: var(--suave); }
+.mini { font-size: 14px; }
+.rotulo { font: 600 12px/1 var(--fonte-texto); letter-spacing: .14em; text-transform: uppercase; color: var(--dourado-texto); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Botões e campos ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 22px; border-radius: 999px; border: 0; cursor: pointer;
+  background: var(--principal); color: var(--off-white); font-weight: 600; text-decoration: none;
+  transition: transform .15s var(--ease-assenta), background .2s, opacity .2s;
+}
+.btn:active { transform: scale(.97); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.claro { background: var(--off-white); color: var(--principal); box-shadow: inset 0 0 0 1.5px var(--linha); }
+.btn.ouro { background: var(--foil); color: var(--bordo); }
+.btn.whats { background: #1F8A4C; color: #fff; }
+.btn.perigo { background: transparent; color: var(--alerta); box-shadow: inset 0 0 0 1.5px currentColor; }
+.btn.cheio { width: 100%; }
+.btn.peq { min-height: 40px; padding: 0 16px; font-size: 14px; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+:focus-visible { outline: 3px solid var(--dourado); outline-offset: 2px; }
+
+.campo { display: grid; gap: 6px; margin-bottom: 14px; }
+.campo > span { font-weight: 600; font-size: 14px; }
+.campo small { color: var(--suave); font-size: 13px; }
+.input {
+  width: 100%; min-height: 48px; padding: 12px 14px; border-radius: 12px;
+  border: 1.5px solid var(--linha); background: var(--off-white); font-size: 16px;
+}
+.input:focus { border-color: var(--principal); outline: none; }
+textarea.input { min-height: 84px; resize: vertical; }
+.linha2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* Escolha em pílulas (retirada/entrega, pagamento) */
+.opcoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 14px; }
+.opcao { position: relative; }
+.opcao input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.opcao > span {
+  display: grid; gap: 2px; min-height: 56px; padding: 10px 14px; border-radius: 14px; align-content: center;
+  background: var(--off-white); box-shadow: inset 0 0 0 1.5px var(--linha); font-weight: 600; transition: .2s;
+}
+.opcao > span small { font-weight: 400; color: var(--suave); font-size: 13px; }
+.opcao input:checked + span { background: var(--principal); color: var(--off-white); box-shadow: none; }
+.opcao input:checked + span small { color: color-mix(in srgb, var(--off-white) 80%, transparent); }
+.opcao input:focus-visible + span { outline: 3px solid var(--dourado); outline-offset: 2px; }
+
+/* Stepper − 2 + */
+.qtd { display: inline-flex; align-items: center; background: var(--creme); border-radius: 999px; }
+.qtd button { width: 44px; height: 44px; border: 0; background: none; border-radius: 50%; cursor: pointer; display: grid; place-items: center; color: var(--principal); }
+.qtd button:disabled { opacity: .3; cursor: default; }
+.qtd button svg { width: 18px; height: 18px; }
+.qtd output { min-width: 28px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.cartao { background: var(--off-white); border-radius: var(--raio); padding: 18px; box-shadow: var(--sombra); }
+.selo { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--creme); color: var(--principal); }
+.selo.ok { background: #E3EFE4; color: var(--ok); }
+.selo.alerta { background: #F6E1DA; color: var(--alerta); }
+.selo.ouro { background: color-mix(in srgb, var(--dourado-claro) 45%, var(--off-white)); color: var(--dourado-texto); }
+
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 60;
+  transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: var(--tinta-app); color: var(--off-white); padding: 12px 20px; border-radius: 999px; font-weight: 600; font-size: 15px;
+  transition: .3s var(--ease-assenta); max-width: calc(100% - 32px); text-align: center;
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+.faixa-demo {
+  background: var(--dourado-claro); color: var(--bordo); text-align: center; font-size: 13px; font-weight: 600; padding: 6px 12px;
+}
+
+/* ---------- Placeholder de foto ---------- */
+.foto { aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: var(--creme); display: grid; place-items: center; }
+.foto img { width: 100%; height: 100%; object-fit: cover; }
+.foto .sem { width: 46%; opacity: .55; }
+.opcao input:disabled + span { opacity: .5; }

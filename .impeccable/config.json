@@ -1,0 +1,86 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "fraunces",
+        "createdAt": "2026-10-03T03:42:20.517Z",
+        "reason": "Brief do projeto (CLAUDE.md) define Fraunces como opção de fonte de títulos"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "logo/index.html"
+        ],
+        "createdAt": "2026-10-03T03:42:20.932Z",
+        "reason": "Brief do projeto (CLAUDE.md) define --creme como fundo principal da marca"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "manual/index.html"
+        ],
+        "createdAt": "2026-10-03T03:42:21.273Z",
+        "reason": "Brief do projeto (CLAUDE.md) define --creme como fundo principal da marca"
+      },
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          "manual/index.html"
+        ],
+        "createdAt": "2026-10-08T00:38:47.880Z",
+        "reason": "Claude: texto e recortes das miniaturas de objetos (caixa 3D, tag, celular) simulam impressos em escala, não são texto de leitura"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "manual/index.html"
+        ],
+        "createdAt": "2026-10-08T00:38:48.147Z",
+        "reason": "Claude: texto e recortes das miniaturas de objetos (caixa 3D, tag, celular) simulam impressos em escala, não são texto de leitura"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "manual/index.html"
+        ],
+        "createdAt": "2026-10-08T00:38:48.406Z",
+        "reason": "Claude: texto e recortes das miniaturas de objetos (caixa 3D, tag, celular) simulam impressos em escala, não são texto de leitura"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "manual/index.html"
+        ],
+        "createdAt": "2026-10-08T00:38:48.660Z",
+        "reason": "Claude: falso positivo; seções e palcos têm padding de 28-150px e .wrap com margem"
+      },
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "manual/index.html"
+        ],
+        "createdAt": "2026-10-08T00:38:48.919Z",
+        "reason": "Claude: poeira dourada decorativa da capa, ligada ao conceito do foil, não é indicador de status"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "manual/index.html"
+        ],
+        "createdAt": "2026-10-08T00:38:49.176Z",
+        "reason": "Claude: listras marcam os espaços [FOTO] a preencher, pedido do CLAUDE.md"
+      }
+    ]
+  }
+}

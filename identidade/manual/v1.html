@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual da Marca</title>
+<link rel="stylesheet" href="../tokens.css">
+<script src="../brand.js"></script>
+<script src="../motion/logo-motion.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--creme); color: var(--chocolate); font-family: var(--fonte-texto); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img, svg { display: block; }
+  .tit { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-weight: 400; letter-spacing: -.01em; line-height: 1.05; }
+  .script { font-family: var(--fonte-assinatura); font-weight: 400; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  @media (max-width: 600px) { .wrap { padding: 0 16px; } }
+
+  /* ---------- Navegação ---------- */
+  .nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--creme) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(59,34,24,.08); }
+  .nav .wrap { display: flex; align-items: center; gap: 20px; height: 60px; }
+  .nav .marca { width: 34px; flex: none; }
+  .nav ol { display: flex; gap: 18px; list-style: none; overflow-x: auto; scrollbar-width: none; font-size: 14px; white-space: nowrap; }
+  .nav a { color: var(--cacau); text-decoration: none; }
+  .nav a:hover { color: var(--caramelo-texto); }
+  .seletor { margin-left: auto; display: flex; gap: 4px; background: var(--off-white); border-radius: 99px; padding: 4px; flex: none; }
+  .seletor button { border: 0; background: none; font: 600 13px var(--fonte-texto); color: var(--cacau); padding: 6px 12px; border-radius: 99px; cursor: pointer; }
+  .seletor button[aria-pressed="true"] { background: var(--chocolate); color: var(--creme); }
+  @media (max-width: 860px) { .nav ol { display: none; } }
+
+  /* ---------- Capa ---------- */
+  .capa { background: var(--ganache); color: var(--creme); min-height: 92vh; display: grid; place-items: center; text-align: center; padding: 80px 16px; position: relative; overflow: hidden; }
+  .capa::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 35%, rgba(201,154,91,.16), transparent 60%); }
+  .capa-logo { width: min(420px, 78vw); margin: 0 auto 40px; position: relative; }
+  .capa-logo.larga { width: min(680px, 90vw); }
+  .capa h1 { font-size: clamp(15px, 2vw, 18px); font-family: var(--fonte-texto); font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--dourado-claro); position: relative; }
+  .capa p { margin-top: 14px; color: rgba(247,237,224,.72); position: relative; }
+  .capa .replay { position: relative; margin-top: 28px; }
+  .calda-divisor { display: block; width: 100%; height: 70px; color: var(--ganache); margin-top: -1px; }
+
+  /* ---------- Seções ---------- */
+  section { padding: 96px 0; }
+  section + section { border-top: 1px solid rgba(59,34,24,.08); }
+  .cab { display: grid; grid-template-columns: 120px 1fr; gap: 24px; margin-bottom: 48px; align-items: start; }
+  .num { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-style: italic; font-size: 56px; color: var(--caramelo-texto); line-height: .9; }
+  .cab h2 { font-size: clamp(36px, 5vw, 60px); }
+  .cab p { margin-top: 14px; max-width: 640px; color: var(--cacau); font-size: 18px; }
+  @media (max-width: 700px) { .cab { grid-template-columns: 1fr; gap: 8px; } section { padding: 64px 0; } }
+  h3 { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-weight: 500; font-size: 24px; margin-bottom: 12px; }
+  .rotulo { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--cacau); font-weight: 600; }
+  .cartao { background: var(--off-white); border-radius: var(--raio-m); padding: 32px; }
+  .g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .g2 > *, .g3 > *, .g4 > * { min-width: 0; }
+  @media (max-width: 900px) { .g3, .g4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } .cartao { padding: 24px; } }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid currentColor; background: none; color: inherit; font: 600 14px var(--fonte-texto); padding: 10px 18px; border-radius: 99px; cursor: pointer; }
+  .btn:hover { background: rgba(226,122,63,.12); }
+
+  /* 01 Essência */
+  .conceito { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  .conceito .grande { font-size: clamp(64px, 11vw, 150px); line-height: .85; }
+  .conceito .grande em { color: var(--caramelo-texto); font-style: italic; }
+  @media (max-width: 800px) { .conceito { grid-template-columns: 1fr; gap: 24px; } }
+  .traco h3 { margin-bottom: 6px; }
+  .traco p { color: var(--cacau); font-size: 15px; }
+  .traco svg { width: 30px; margin-bottom: 14px; color: var(--caramelo); }
+  .voz { margin-top: 20px; }
+  .voz li { list-style: none; padding: 14px 0; border-bottom: 1px dashed rgba(59,34,24,.18); font-size: 16px; }
+  .voz li:last-child { border: 0; }
+  .sim .rotulo { color: #3E6B3A; }
+  .nao .rotulo { color: #9A3324; }
+  .nao li { color: var(--cacau); text-decoration: line-through; text-decoration-color: rgba(154,51,36,.5); }
+
+  /* 02 Arquitetura */
+  .arvore { display: grid; gap: 20px; justify-items: center; text-align: center; }
+  .arvore .mae { background: var(--chocolate); color: var(--creme); border-radius: var(--raio-m); padding: 28px 40px; }
+  .arvore .mae b { display: block; font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-weight: 500; font-size: 30px; }
+  .arvore .filhos { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 860px; position: relative; padding-top: 28px; }
+  .arvore .filhos::before { content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 28px; border: 1.5px solid var(--dourado); border-bottom: 0; border-radius: 14px 14px 0 0; }
+  .arvore .filho { background: var(--off-white); border-radius: var(--raio-m); padding: 26px; }
+  .arvore .filho b { display: block; font-size: 22px; }
+  .arvore .filho .script { font-size: 44px; line-height: 1; color: var(--chocolate); }
+  .arvore .filho p { color: var(--cacau); font-size: 15px; margin-top: 8px; }
+  @media (max-width: 600px) { .arvore .filhos { grid-template-columns: 1fr; } .arvore .filhos::before { display: none; } }
+
+  /* 03 Logo */
+  .palco { border-radius: var(--raio-m); display: grid; place-items: center; padding: 48px; aspect-ratio: 4 / 3; }
+  .palco > div { width: min(100%, 360px); }
+  .palco.larga > div { width: min(100%, 560px); }
+  .palco.claro { background: var(--off-white); }
+  .palco.claro .logo--claro, .cartao .logo--claro { --logo-fundo: var(--off-white); }
+  .palco.escuro { background: var(--ganache); color: var(--creme); }
+  .palco.choc { background: var(--chocolate); }
+  .palco.creme { background: var(--creme); color: var(--chocolate); border: 1px solid rgba(59,34,24,.08); }
+  .palco.foto { background: repeating-linear-gradient(135deg, #8a6a52 0 14px, #9c7a60 14px 28px); }
+  .legenda { margin-top: 10px; font-size: 14px; color: var(--cacau); }
+  .principal-wrap { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+  .principal-wrap .palco { aspect-ratio: auto; min-height: 460px; }
+  @media (max-width: 800px) { .principal-wrap { grid-template-columns: 1fr; } .principal-wrap .palco { min-height: 320px; } }
+  .ideia-prop { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-size: 22px; line-height: 1.35; }
+  .ideia-prop small { display: block; font: 600 12px var(--fonte-texto); letter-spacing: .14em; text-transform: uppercase; color: var(--caramelo-texto); margin-bottom: 10px; }
+  .protecao { position: relative; outline: 1.5px dashed var(--caramelo); outline-offset: 28px; margin: 28px; }
+  .regras { display: grid; gap: 14px; margin-top: 24px; font-size: 15px; color: var(--cacau); }
+  .regras b { color: var(--chocolate); }
+  .tam { display: flex; align-items: end; gap: 28px; flex-wrap: wrap; }
+  .tam div { text-align: center; font-size: 13px; color: var(--cacau); }
+
+  /* 04 Incorretos */
+  .errado .palco { aspect-ratio: 1; padding: 30px; position: relative; overflow: hidden; }
+  .errado .palco::after { content: ''; position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 50%; background: #9A3324 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 6l8 8M14 6l-8 8' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center/18px no-repeat; }
+  .errado p { margin-top: 10px; font-size: 15px; }
+  .errado .palco > div { width: 58%; }
+  .esticado > div { transform: scaleX(1.5); }
+  .girado > div { transform: rotate(-18deg); }
+  .rosa { --logo-tinta: #E85A9B; --logo-gota: #F7A8C8; --logo-ouro: #E85A9B; --logo-fundo: #FDE6F0; }
+  .sombra > div { filter: drop-shadow(6px 8px 0 #E27A3F) drop-shadow(0 0 6px #000); }
+  .poluido { background: conic-gradient(from 30deg, #6b4632, #c9a57e, #3b2218, #e27a3f, #6b4632); }
+
+  /* 05 Cores */
+  .cores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .cores { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .cores { grid-template-columns: 1fr; } }
+  .cor { border-radius: var(--raio-m); overflow: hidden; background: var(--off-white); }
+  .cor .amostra { height: 150px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; }
+  .cor .amostra b { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-weight: 500; font-size: 26px; }
+  .cor .amostra span { font-size: 13px; opacity: .8; }
+  .cor dl { padding: 16px 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 13px; }
+  .cor dt { color: var(--cacau); }
+  .cor dd { font-variant-numeric: tabular-nums; font-weight: 500; }
+  .cor .uso { grid-column: 1 / -1; margin-top: 8px; color: var(--cacau); font-size: 14px; }
+  .proporcao { display: flex; height: 72px; border-radius: var(--raio-p); overflow: hidden; margin-top: 12px; }
+  .proporcao div { display: flex; align-items: end; padding: 10px 12px; font-size: 13px; font-weight: 600; }
+  .contraste { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 15px; }
+  .contraste td { padding: 12px 10px; border-bottom: 1px solid rgba(59,34,24,.1); }
+  .contraste .exemplo { border-radius: 8px; padding: 8px 14px; font-weight: 600; display: inline-block; min-width: 150px; }
+  .selo-ok { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+  .selo-ok.sim { background: #E1EBD9; color: #2E5129; }
+  .selo-ok.meio { background: #F6E3C8; color: #7A4A12; }
+  .selo-ok.nao { background: #F4D6D0; color: #8A2A1C; }
+
+  /* 06 Tipografia */
+  .fonte { display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: center; padding: 36px 0; border-bottom: 1px solid rgba(59,34,24,.1); }
+  .fonte:last-of-type { border: 0; }
+  .fonte .amostra-g { font-size: clamp(64px, 10vw, 120px); line-height: 1; }
+  .fonte p { color: var(--cacau); font-size: 15px; margin-top: 8px; }
+  .fonte .alfabeto { font-size: 22px; line-height: 1.5; word-break: break-word; }
+  @media (max-width: 700px) { .fonte { grid-template-columns: 1fr; gap: 12px; } }
+  .escala { margin-top: 32px; }
+  .escala li { list-style: none; display: grid; grid-template-columns: 150px 1fr; align-items: baseline; gap: 20px; padding: 12px 0; border-bottom: 1px dashed rgba(59,34,24,.15); }
+  .escala li span:first-child { font-size: 13px; color: var(--cacau); }
+  .escala li span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 600px) { .escala li { grid-template-columns: 1fr; gap: 2px; } }
+
+  /* 07 Elementos */
+  .elem .palco { aspect-ratio: 1; padding: 32px; }
+  .icones { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  @media (max-width: 800px) { .icones { grid-template-columns: repeat(3, 1fr); } }
+  .destaque { text-align: center; font-size: 14px; }
+  .destaque .bola { aspect-ratio: 1; border-radius: 50%; background: var(--chocolate); color: var(--creme); display: grid; place-items: center; margin-bottom: 10px; box-shadow: 0 0 0 3px var(--creme), 0 0 0 5px var(--dourado); }
+  .destaque:nth-child(even) .bola { background: var(--off-white); color: var(--chocolate); }
+  .destaque svg { width: 44%; }
+  .padrao { height: 260px; border-radius: var(--raio-m); }
+
+  /* 08 Foto e conteúdo */
+  .foto-ph { aspect-ratio: 4 / 5; border-radius: var(--raio-m); border: 2px dashed rgba(59,34,24,.25); display: grid; place-items: center; text-align: center; padding: 20px; color: var(--cacau); font-size: 14px; background: repeating-linear-gradient(45deg, transparent 0 12px, rgba(59,34,24,.03) 12px 24px); }
+  .foto-ph b { display: block; font: 600 13px var(--fonte-texto); letter-spacing: .14em; color: var(--chocolate); margin-bottom: 6px; }
+  .pilares { display: flex; border-radius: var(--raio-p); overflow: hidden; margin-top: 16px; min-height: 96px; }
+  .pilares div { padding: 14px; font-size: 14px; line-height: 1.3; }
+  .pilares b { display: block; font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-size: 30px; font-weight: 500; }
+  @media (max-width: 600px) { .pilares { flex-direction: column; } .pilares div { flex: none !important; } }
+
+  /* 09 Motion */
+  .motion-palco { background: var(--ganache); border-radius: var(--raio-m); display: grid; place-items: center; padding: 56px 24px; min-height: 420px; text-align: center; color: var(--creme); }
+  .motion-palco > div:first-child { width: min(100%, 380px); margin-bottom: 28px; }
+  .motion-palco > div.larga { width: min(100%, 560px); }
+  .curva { display: grid; grid-template-columns: 90px 1fr; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px dashed rgba(59,34,24,.15); font-size: 15px; }
+  .curva .trilho { height: 10px; border-radius: 99px; background: rgba(59,34,24,.1); position: relative; }
+  .curva .bolinha { position: absolute; top: -3px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--caramelo); }
+
+  /* 10 Aplicações */
+  .ig { background: #fff; color: #111; border-radius: 28px; padding: 22px; font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 14px; max-width: 400px; box-shadow: 0 30px 60px -30px rgba(36,19,13,.35); }
+  .ig-topo { display: flex; gap: 18px; align-items: center; }
+  .ig-foto { width: 88px; height: 88px; border-radius: 50%; padding: 3px; background: conic-gradient(var(--caramelo), var(--dourado), var(--caramelo)); flex: none; }
+  .ig-foto > div { width: 100%; height: 100%; border-radius: 50%; background: var(--ganache); border: 3px solid #fff; display: grid; place-items: center; overflow: hidden; }
+  .ig-foto > div > div { width: 64%; }
+  .ig-num { display: flex; gap: 18px; text-align: center; font-size: 13px; }
+  .ig-num b { display: block; font-size: 16px; }
+  .ig-bio { margin-top: 12px; line-height: 1.45; white-space: pre-line; }
+  .ig-bio b { display: block; }
+  .ig-dest { display: flex; gap: 12px; margin-top: 16px; overflow: hidden; }
+  .ig-dest .destaque { flex: 1 1 0; max-width: 60px; min-width: 0; font-size: 11px; white-space: nowrap; }
+  .ig-dest .bola { box-shadow: 0 0 0 2px #fff, 0 0 0 3px #ddd; }
+  .post { aspect-ratio: 4 / 5; border-radius: var(--raio-p); overflow: hidden; position: relative; background: var(--creme); display: flex; flex-direction: column; }
+  .post .foto-ph { border-radius: 0; border: 0; flex: 1; aspect-ratio: auto; background-color: #EADBC8; }
+  .post .barra { background: var(--chocolate); color: var(--creme); padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; }
+  .post .barra .tit { font-size: 22px; line-height: 1.2; }
+  .post .barra small { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dourado-claro); }
+  .post .tag { position: absolute; top: 14px; left: 14px; background: var(--caramelo); color: var(--ganache); font-weight: 700; font-size: 11px; letter-spacing: .1em; padding: 5px 10px; border-radius: 99px; text-transform: uppercase; }
+  .post .mini-logo { position: absolute; top: 12px; right: 12px; width: 44px; }
+  .caixa { aspect-ratio: 1; perspective: 900px; display: grid; place-items: center; }
+  .caixa .tampa { width: 74%; aspect-ratio: 1; background: var(--chocolate); border-radius: 6px; transform: rotateX(52deg) rotateZ(-38deg); box-shadow: -18px 26px 0 #2a170f, -30px 50px 50px rgba(36,19,13,.35); display: grid; place-items: center; outline: 2px solid var(--dourado); outline-offset: -14px; }
+  .caixa .tampa > div { width: 64%; }
+  .sacola { aspect-ratio: 1; display: grid; place-items: center; }
+  .sacola .corpo { width: 62%; aspect-ratio: .8; background: var(--kraft); border-radius: 4px 4px 8px 8px; position: relative; display: grid; place-items: center; box-shadow: inset -26px 0 0 rgba(0,0,0,.06); }
+  .sacola .corpo::before { content: ''; position: absolute; top: -40px; left: 28%; width: 44%; height: 60px; border: 6px solid #8C6A48; border-bottom: 0; border-radius: 40px 40px 0 0; }
+  .sacola .corpo > div { width: 56%; }
+  .avental { aspect-ratio: 1; display: grid; place-items: center; }
+  .avental .pano { width: 58%; aspect-ratio: .78; background: var(--chocolate); clip-path: polygon(22% 0, 78% 0, 78% 14%, 100% 34%, 100% 100%, 0 100%, 0 34%, 22% 14%); display: grid; justify-items: center; align-content: start; padding-top: 36%; }
+  .avental .pano > div { width: 34%; }
+
+  footer { background: var(--ganache); color: rgba(247,237,224,.7); padding: 64px 0; font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+  footer .assin { width: 220px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Seções do manual">
+  <div class="wrap">
+    <div class="marca logo--claro" data-logo="selo" data-reduzido></div>
+    <ol>
+      <li><a href="#essencia">Essência</a></li>
+      <li><a href="#arquitetura">Marca</a></li>
+      <li><a href="#logo">Logo</a></li>
+      <li><a href="#cores">Cores</a></li>
+      <li><a href="#tipografia">Tipografia</a></li>
+      <li><a href="#elementos">Elementos</a></li>
+      <li><a href="#conteudo">Conteúdo</a></li>
+      <li><a href="#motion">Motion</a></li>
+      <li><a href="#aplicacoes">Aplicações</a></li>
+    </ol>
+    <div class="seletor" role="group" aria-label="Proposta de logo">
+      <button data-prop="A">A</button><button data-prop="B">B</button><button data-prop="C">C</button>
+    </div>
+  </div>
+</nav>
+
+<header class="capa">
+  <div>
+    <div class="capa-logo" id="capaLogo"><div data-principal="principal" class="logo--escuro"></div></div>
+    <h1>Manual de identidade visual</h1>
+    <p><span data-brand="nomeCompleto"></span> · versão 1 · outubro de 2026</p>
+    <button class="btn replay" data-replay="#capaLogo">↻ Ver animação de novo</button>
+  </div>
+</header>
+<svg class="calda-divisor" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true" id="divisor"><path fill="currentColor"/></svg>
+
+<main>
+<!-- 01 ESSÊNCIA ======================================== -->
+<section id="essencia">
+  <div class="wrap">
+    <div class="cab"><span class="num">01</span><div><h2 class="tit">Essência</h2><p>A marca deixa de ser uma loja e passa a ser uma pessoa. Quem compra um brownie compra da Layanny: do rosto dela, do capricho dela, da cozinha dela.</p></div></div>
+
+    <div class="conceito">
+      <div class="tit grande">Tudo<br>aqui <em>derrete</em></div>
+      <div>
+        <p style="font-size:19px">O conceito nasce da promessa que já vende: <strong>"derrete na boca"</strong>. Ele vira regra visual. As formas escorrem, as cores são de chocolate quente e caramelo, e o movimento é lento, como calda.</p>
+        <p style="margin-top:16px;color:var(--cacau)">O equilíbrio é entre o <strong>afeto</strong> de uma confeiteira do interior, que conhece os clientes pelo nome, e o <strong>acabamento profissional</strong> de quem quer fechar parceria com marca grande.</p>
+      </div>
+    </div>
+
+    <div class="g4" style="margin-top:56px">
+      <div class="cartao traco"><svg viewBox="0 0 24 24" fill="currentColor"><path id="ic-cor"/></svg><h3>Afetiva</h3><p>Fala como quem conhece o cliente pelo nome. O 🧡 é a assinatura.</p></div>
+      <div class="cartao traco"><svg viewBox="0 0 24 24" fill="currentColor"><path id="ic-gota"/></svg><h3>Artesanal</h3><p>Feito à mão, em pequena quantidade. Mostra a massa, a faca e o forno.</p></div>
+      <div class="cartao traco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg><h3>Caprichosa</h3><p>Corte limpo, embalagem bonita, foto clara. O cuidado aparece nos detalhes.</p></div>
+      <div class="cartao traco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><h3>Próxima</h3><p>Mostra a rotina real: o que deu certo, o que queimou, a correria das datas.</p></div>
+    </div>
+
+    <div class="g2 voz" style="margin-top:20px">
+      <div class="cartao sim"><span class="rotulo">Falamos assim</span>
+        <ul><li>"Saiu fornada nova e tá derretendo 🧡"</li><li>"Separei os últimos 6 de pronta entrega, quem chega primeiro?"</li><li>"Te ensino o corte que deixa o brownie com essa casquinha"</li><li>"Obrigada por cada pedido, de verdade"</li></ul></div>
+      <div class="cartao nao"><span class="rotulo">Evitamos</span>
+        <ul><li>"PROMOÇÃO IMPERDÍVEL!!! CORRE!!!"</li><li>"Prezado cliente, informamos que..."</li><li>Gírias forçadas ou memes que não são da Layanny</li><li>Copiar frases e bordões de outras confeiteiras</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ARQUITETURA ===================================== -->
+<section id="arquitetura">
+  <div class="wrap">
+    <div class="cab"><span class="num">02</span><div><h2 class="tit">Nome e arquitetura</h2><p>O sobrenome raro deixa a marca única e fácil de achar na busca. A "Lalá" continua viva, agora como a linha de brownies.</p></div></div>
+    <div class="arvore">
+      <div class="mae"><span class="rotulo" style="color:var(--dourado-claro)">Marca-mãe</span><b data-brand="nomeCompleto"></b></div>
+      <div class="filhos">
+        <div class="filho"><span class="rotulo">Linha de produto</span><div class="script" data-brand="linhaBrownie"></div><b style="font-size:15px;font-weight:500;color:var(--cacau)">by <span data-brand="nome"></span></b><p>O carro-chefe. Aparece em etiquetas, cardápio e na tampa da caixa. Mantém o carinho de quem já conhece a marca.</p></div>
+        <div class="filho"><span class="rotulo">Criadora de conteúdo</span><div class="script" data-brand="nome"></div><p>A pessoa por trás da marca: rotina, dicas, parcerias, afiliados e, no futuro, o curso ou e-book de brownies.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 LOGO ============================================ -->
+<section id="logo">
+  <div class="wrap">
+    <div class="cab"><span class="num">03</span><div><h2 class="tit">Logo</h2><p>São três propostas em avaliação. Troque no seletor <b>A · B · C</b> lá em cima: o manual inteiro se atualiza com a proposta escolhida.</p></div></div>
+
+    <div class="principal-wrap">
+      <div class="palco claro larga" id="logoPrincipal"><div class="protecao"><div data-principal="principal" class="logo--claro"></div></div></div>
+      <div class="cartao" style="display:flex;flex-direction:column;justify-content:space-between;gap:24px">
+        <p class="ideia-prop" id="ideiaProp"></p>
+        <div class="regras">
+          <div><b>Área de proteção:</b> a linha tracejada. Nada (texto, foto, borda) entra nesse espaço.</div>
+          <div><b>Fundo preferido:</b> creme ou off-white. Chocolate só em peças de impacto.</div>
+          <button class="btn" data-replay="#logoPrincipal" style="justify-self:start">↻ Animar</button>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:56px">Variações de cor</h3>
+    <div class="g4">
+      <div><div class="palco claro larga"><div data-principal="principal" class="logo--claro"></div></div><p class="legenda">Chocolate sobre creme (principal)</p></div>
+      <div><div class="palco escuro larga"><div data-principal="principal" class="logo--escuro"></div></div><p class="legenda">Creme sobre ganache</p></div>
+      <div><div class="palco creme larga"><div data-principal="principal" class="logo--mono"></div></div><p class="legenda">Monocromática (carimbo, bordado, gravação)</p></div>
+      <div><div class="palco choc larga"><div data-principal="principal" class="logo--ouro"></div></div><p class="legenda">Dourado (hot stamping em caixa e adesivo)</p></div>
+    </div>
+
+    <h3 style="margin-top:56px">Versão reduzida e tamanho mínimo</h3>
+    <div class="g2">
+      <div class="cartao"><div class="tam">
+        <div><div style="width:140px" data-principal="reduzida" class="logo--claro"></div>140px</div>
+        <div><div style="width:80px" data-principal="reduzida" class="logo--claro"></div>80px</div>
+        <div><div style="width:48px" data-principal="reduzida" class="logo--claro"></div>48px (mínimo)</div>
+      </div><p class="legenda" style="margin-top:20px">Use a reduzida na foto de perfil, em ícones, carimbos e espaços pequenos. Abaixo de 48px na tela ou 12mm impresso, ela deixa de ser legível.</p></div>
+      <div class="cartao"><div class="tam">
+        <div><div style="width:240px" data-principal="principal" class="logo--claro"></div>240px</div>
+        <div><div style="width:140px" data-principal="principal" class="logo--claro"></div>140px (mínimo)</div>
+      </div><p class="legenda" style="margin-top:20px">A versão completa precisa de pelo menos 140px na tela ou 30mm impresso para o "Confeitaria" continuar legível.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 USOS INCORRETOS ================================ -->
+<section id="incorretos">
+  <div class="wrap">
+    <div class="cab"><span class="num">04</span><div><h2 class="tit">O que não fazer</h2><p>O logo só funciona se for usado sempre igual. Estes são os erros mais comuns.</p></div></div>
+    <div class="g3 errado">
+      <div><div class="palco claro larga esticado"><div data-principal="principal" class="logo--claro"></div></div><p>Não esticar nem achatar.</p></div>
+      <div><div class="palco claro larga girado"><div data-principal="principal" class="logo--claro"></div></div><p>Não girar nem inclinar.</p></div>
+      <div><div class="palco larga" style="background:#FDE6F0"><div data-principal="principal" class="rosa"></div></div><p>Não usar rosa nem cores fora da paleta.</p></div>
+      <div><div class="palco claro larga sombra"><div data-principal="principal" class="logo--claro"></div></div><p>Não colocar sombra, contorno ou brilho.</p></div>
+      <div><div class="palco larga poluido"><div data-principal="principal" class="logo--claro"></div></div><p>Não aplicar sobre fundo confuso sem contraste.</p></div>
+      <div><div class="palco claro larga"><div class="tit" style="font-family:'Comic Sans MS',cursive;font-size:42px;text-align:center;line-height:1.1;color:var(--chocolate)"><span data-brand="nome"></span></div></div><p>Não reescrever o nome com outra fonte.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 CORES ========================================== -->
+<section id="cores">
+  <div class="wrap">
+    <div class="cab"><span class="num">05</span><div><h2 class="tit">Cores</h2><p>Uma paleta de confeitaria: chocolate, caramelo e creme, com o dourado como acabamento. O caramelo é o 🧡 da marca. Rosa não entra.</p></div></div>
+    <div class="cores" id="cores-lista"></div>
+
+    <h3 style="margin-top:56px">Proporção</h3>
+    <p class="legenda" style="margin-top:0">Em uma peça típica, as cores aparecem mais ou menos nesta medida.</p>
+    <div class="proporcao">
+      <div style="flex:60;background:var(--creme);border:1px solid rgba(59,34,24,.1)">Creme 60%</div>
+      <div style="flex:25;background:var(--chocolate);color:var(--creme)">Chocolate 25%</div>
+      <div style="flex:10;background:var(--caramelo);color:var(--ganache)">10%</div>
+      <div style="flex:5;background:var(--dourado)"></div>
+    </div>
+
+    <h3 style="margin-top:56px">Combinações de texto</h3>
+    <p class="legenda" style="margin-top:0">Contraste calculado automaticamente a partir do <code>tokens.css</code>. AA é o mínimo para texto corrido; "só título" vale para letras grandes (a partir de 64px nas peças de 1080px).</p>
+    <div style="overflow-x:auto"><table class="contraste" id="contraste"></table></div>
+  </div>
+</section>
+
+<!-- 06 TIPOGRAFIA ===================================== -->
+<section id="tipografia">
+  <div class="wrap">
+    <div class="cab"><span class="num">06</span><div><h2 class="tit">Tipografia</h2><p>Três famílias, cada uma com um papel. Todas gratuitas no Google Fonts.</p></div></div>
+
+    <div class="fonte">
+      <div><span class="rotulo">Assinatura · Allura</span><p>Só para o nome, a linha "Brownie da Lalá" e palavras soltas de carinho. No máximo 3 palavras. Nunca em texto corrido nem em preço.</p></div>
+      <div class="script amostra-g">Layanny <span style="color:var(--caramelo-texto)">derrete</span></div>
+    </div>
+    <div class="fonte">
+      <div><span class="rotulo">Títulos · Fraunces (Soft)</span><p>Serifada com as pontas arredondadas, como chocolate amolecido. Para títulos, chamadas e nomes de produto. Itálico para destacar uma palavra.</p></div>
+      <div><div class="tit amostra-g">Torta <em style="color:var(--caramelo-texto)">cookie</em></div><div class="tit alfabeto">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div></div>
+    </div>
+    <div class="fonte">
+      <div><span class="rotulo">Texto · DM Sans</span><p>Limpa e fácil de ler no celular. Para preços, cardápio, legendas, informações de pedido e todo texto longo.</p></div>
+      <div><div class="amostra-g" style="font-family:var(--fonte-texto);font-weight:500">R$ 12,90</div><div class="alfabeto" style="font-family:var(--fonte-texto)">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 0123456789</div></div>
+    </div>
+
+    <h3 style="margin-top:48px">Escala para as peças de Instagram (largura de 1080px)</h3>
+    <p class="legenda" style="margin-top:0">Abaixo de 40px o texto some na tela do celular. Aqui a escala aparece reduzida a 1/3.</p>
+    <ul class="escala" id="escala"></ul>
+  </div>
+</section>
+
+<!-- 07 ELEMENTOS ====================================== -->
+<section id="elementos">
+  <div class="wrap">
+    <div class="cab"><span class="num">07</span><div><h2 class="tit">Elementos gráficos</h2><p>Peças pequenas que fazem tudo parecer da mesma família, mesmo sem o logo.</p></div></div>
+    <div class="g3 elem">
+      <div><div class="palco claro"><svg viewBox="0 0 300 160" width="100%"><path id="el-calda" style="fill:var(--chocolate)"/></svg></div><p class="legenda"><b>A calda.</b> Divisor de seções, topo de stories e borda de cardápio. Sempre escorrendo para baixo.</p></div>
+      <div><div class="palco claro"><svg viewBox="0 0 200 200" width="60%"><path id="el-gota" style="fill:var(--caramelo)"/></svg></div><p class="legenda"><b>A gota caramelo.</b> Marcador de lista, pingo do "i" e ponto de destaque. É o 🧡 em forma de calda.</p></div>
+      <div><div class="palco escuro"><svg viewBox="0 0 200 200" width="56%"><path id="el-cor" style="fill:var(--caramelo)"/></svg></div><p class="legenda"><b>O coração.</b> O 🧡 desenhado, para quando o emoji não cabe: etiquetas, selo e fim de vídeo.</p></div>
+    </div>
+
+    <h3 style="margin-top:56px">Padrão</h3>
+    <div class="padrao" id="padrao"></div>
+    <p class="legenda">Para papel de seda, fita, fundo de stories e verso de cartão. Use em uma cor só, sobre creme ou chocolate.</p>
+
+    <h3 style="margin-top:56px">Ícones dos destaques</h3>
+    <div class="icones" id="icones"></div>
+  </div>
+</section>
+
+<!-- 08 CONTEÚDO ====================================== -->
+<section id="conteudo">
+  <div class="wrap">
+    <div class="cab"><span class="num">08</span><div><h2 class="tit">Foto e conteúdo</h2><p>Hoje o ponto fraco são as fotos escuras na bancada de granito e a Layanny quase não aparecer. A identidade só funciona se a foto mudar junto.</p></div></div>
+    <div class="g4">
+      <div><div class="foto-ph"><div><b>[FOTO]</b>Layanny de avental chocolate, cortando o brownie, luz da janela</div></div><p class="legenda"><b>Rosto em quase todo post.</b> Ela é a marca.</p></div>
+      <div><div class="foto-ph"><div><b>[FOTO]</b>Close do corte com a casquinha e o meio derretendo</div></div><p class="legenda"><b>O "derrete" em close.</b> A textura vende sozinha.</p></div>
+      <div><div class="foto-ph"><div><b>[FOTO]</b>Bancada clara (madeira ou mármore branco) com a caixa da marca</div></div><p class="legenda"><b>Cenário fixo e claro.</b> Nunca o granito escuro.</p></div>
+      <div><div class="foto-ph"><div><b>[FOTO]</b>Mão do cliente recebendo a sacola kraft com o selo</div></div><p class="legenda"><b>Prova real.</b> Entregas e clientes felizes.</p></div>
+    </div>
+    <div class="g2" style="margin-top:20px">
+      <div class="cartao"><h3>Uniforme</h3><p style="color:var(--cacau)">Avental chocolate com o monograma bordado em dourado ou creme no peito. Sempre o mesmo, para que o público reconheça a Layanny em qualquer vídeo.</p></div>
+      <div class="cartao"><h3>Luz e cor</h3><p style="color:var(--cacau)">Luz natural de lado, nunca de cima. Na edição, um leve tom quente e as sombras sem estourar no preto. O creme do fundo puxa a paleta da marca para dentro da foto.</p></div>
+    </div>
+    <h3 style="margin-top:48px">Pilares de conteúdo</h3>
+    <div class="pilares">
+      <div style="flex:40;background:var(--chocolate);color:var(--creme)"><b>40%</b>Vende: produto, pedidos, lançamentos, datas</div>
+      <div style="flex:30;background:var(--caramelo);color:var(--ganache)"><b>30%</b>Conecta: rosto, rotina, conquistas</div>
+      <div style="flex:20;background:var(--caramelo-claro)"><b>20%</b>Ensina: corte, embalagem, preço</div>
+      <div style="flex:10;background:var(--off-white)"><b>10%</b>Prova</div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 MOTION ======================================== -->
+<section id="motion">
+  <div class="wrap">
+    <div class="cab"><span class="num">09</span><div><h2 class="tit">Motion</h2><p>Tudo se move como calda: devagar para começar, devagar para parar. Só a gota tem pressa, porque está caindo.</p></div></div>
+    <div class="g2">
+      <div class="motion-palco" id="motionPalco"><div data-principal="principal" class="logo--escuro"></div><button class="btn" data-replay="#motionPalco">↻ Animar de novo</button></div>
+      <div class="cartao">
+        <h3>Curvas da marca</h3>
+        <div class="curva"><b>Derrete</b><div class="trilho"><span class="bolinha" data-ease="--ease-derrete"></span></div></div>
+        <div class="curva"><b>Pinga</b><div class="trilho"><span class="bolinha" data-ease="--ease-pinga"></span></div></div>
+        <div class="curva"><b>Assenta</b><div class="trilho"><span class="bolinha" data-ease="--ease-assenta"></span></div></div>
+        <div class="regras">
+          <div><b>Derrete:</b> entrada de textos, troca de cenas, revelações.</div>
+          <div><b>Pinga:</b> gotas, quedas e coisas que escorrem.</div>
+          <div><b>Assenta:</b> selos e carimbos que chegam e se acomodam.</div>
+          <div><b>Duração:</b> abertura do logo de 3 a 5s; transições de 0,7s; nada piscando.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 APLICAÇÕES ==================================== -->
+<section id="aplicacoes">
+  <div class="wrap">
+    <div class="cab"><span class="num">10</span><div><h2 class="tit">Aplicações</h2><p>Uma prévia de como a marca vive no Instagram e na embalagem. Os templates finais em tamanho real vêm depois da aprovação do logo.</p></div></div>
+    <div class="g2" style="align-items:start">
+      <div class="ig">
+        <div class="ig-topo">
+          <div class="ig-foto"><div><div data-principal="reduzida" class="logo--escuro"></div></div></div>
+          <div class="ig-num"><div><b>117</b>posts</div><div><b>26,2 mil</b>seguidores</div><div><b>480</b>seguindo</div></div>
+        </div>
+        <div class="ig-bio" id="bio"></div>
+        <div class="ig-dest" id="igDest"></div>
+      </div>
+      <div class="g2">
+        <div class="post"><span class="tag">Novo</span><div class="mini-logo logo--claro" data-principal="reduzida"></div><div class="foto-ph"><div><b>[FOTO]</b>brownie</div></div><div class="barra"><span class="tit">Brownie de Ninho</span><small>Pronta entrega</small></div></div>
+        <div class="post" style="background:var(--chocolate);color:var(--creme);justify-content:center;padding:26px;text-align:center">
+          <div class="script" style="font-size:44px;line-height:1;color:var(--caramelo-claro)">dica da Lalá</div>
+          <div class="tit" style="font-size:30px;margin-top:10px;line-height:1.2">O corte que deixa a casquinha perfeita</div>
+          <svg viewBox="0 0 300 60" style="margin-top:18px"><path id="post-calda" style="fill:var(--caramelo)"/></svg>
+        </div>
+        <div><div class="palco claro caixa" style="padding:0"><div class="tampa"><div data-principal="principal" class="logo--ouro"></div></div></div><p class="legenda">Caixa com hot stamping dourado</p></div>
+        <div><div class="palco creme sacola" style="padding:0"><div class="corpo"><div data-logo="selo" class="logo--claro"></div></div></div><p class="legenda">Sacola kraft com adesivo-selo</p></div>
+      </div>
+    </div>
+    <div class="g3" style="margin-top:20px">
+      <div><div class="palco claro avental" style="padding:0"><div class="pano"><div data-principal="reduzida" class="logo--ouro"></div></div></div><p class="legenda">Avental com monograma bordado</p></div>
+      <div><div class="palco escuro" style="padding:28px"><div data-logo="selo" class="logo--escuro" style="width:70%"></div></div><p class="legenda">Adesivo redondo, versão escura</p></div>
+      <div><div class="palco creme" style="padding:28px"><div data-logo="selo" class="logo--mono" style="width:70%;color:var(--cacau)"></div></div><p class="legenda">Carimbo em uma cor (papel de seda, tag)</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="assin logo--escuro" data-logo="assinatura"></div>
+    <div>Manual v1, em aprovação. Fonte da verdade: <code>tokens.css</code> e <code>brand.js</code>.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const G = window.BrandGeo;
+  const B = window.BRAND;
+
+  /* ---------- Propostas ---------- */
+  const PROPOSTAS = {
+    A: { principal: ['monograma', { 'data-com-nome': '' }], reduzida: ['monograma', {}], larga: false,
+         ideia: 'O LS entrelaçado, em serifa de alto contraste, abraçado por um fio de calda que deixa cair uma gota caramelo. É o caminho mais sofisticado e o que mais combina com caixa dourada.' },
+    B: { principal: ['assinatura', {}], reduzida: ['assinatura', { 'data-curta': '' }], larga: true,
+         ideia: 'O nome escrito à mão, como uma assinatura, com o traço de baixo virando calda. É o caminho mais pessoal: diz na hora que a marca é uma pessoa.' },
+    C: { principal: ['selo', {}], reduzida: ['selo', { 'data-reduzido': '' }], larga: false,
+         ideia: 'Um selo de confeitaria em que o anel de chocolate derrete para dentro. É o caminho mais artesanal e já nasce pronto para adesivo, carimbo e sacola kraft.' },
+  };
+
+  function aplicarProposta(p) {
+    const cfg = PROPOSTAS[p] || PROPOSTAS.A;
+    document.querySelectorAll('[data-principal]').forEach((el) => {
+      const [logo, attrs] = cfg[el.dataset.principal];
+      ['data-com-nome', 'data-curta', 'data-reduzido'].forEach((a) => el.removeAttribute(a));
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      el.dataset.logo = logo;
+    });
+    document.querySelectorAll('.seletor button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.prop === p));
+    document.getElementById('capaLogo').classList.toggle('larga', cfg.larga);
+    document.getElementById('ideiaProp').innerHTML = `<small>Proposta ${p}</small>${cfg.ideia}`;
+    window.renderBrand();
+    try { localStorage.setItem('ls-proposta', p); } catch (e) {}
+    ['#capaLogo', '#motionPalco'].forEach((s) => window.LSMotion.play(document.querySelector(s)));
+  }
+
+  document.querySelectorAll('.seletor button').forEach((b) => b.addEventListener('click', () => aplicarProposta(b.dataset.prop)));
+  document.querySelectorAll('[data-replay]').forEach((b) => b.addEventListener('click', () => window.LSMotion.play(document.querySelector(b.dataset.replay))));
+
+  /* ---------- Elementos desenhados ---------- */
+  document.querySelector('#divisor path').setAttribute('d', G.calda({ x: -10, y: -6, w: 1220, h: 22, curva: 0,
+    drops: [[.07, 34, 16], [.16, 58, 20], [.31, 26, 13], [.45, 48, 18], [.58, 30, 14], [.72, 62, 22], [.86, 36, 15], [.95, 50, 18]] }));
+  document.getElementById('el-calda').setAttribute('d', G.calda({ x: 20, y: 30, w: 260, h: 26, curva: 0, drops: [[.15, 50, 16], [.38, 86, 22], [.62, 40, 15], [.84, 70, 19]] }));
+  document.getElementById('el-gota').setAttribute('d', G.gota(100, 110, 46));
+  document.getElementById('el-cor').setAttribute('d', G.coracao(100, 100, 13));
+  document.getElementById('ic-cor').setAttribute('d', G.coracao(12, 12.4, 1.7));
+  document.getElementById('ic-gota').setAttribute('d', G.gota(12, 13.5, 5.5));
+  document.getElementById('post-calda').setAttribute('d', G.calda({ x: 40, y: 6, w: 220, h: 8, drops: [[.25, 26, 9], [.55, 40, 11], [.8, 20, 8]] }));
+
+  // Padrão: corações e gotas alternados
+  const pad = `<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'><path d='${G.coracao(22, 22, 1.5)}' fill='%235A3426' fill-opacity='.9'/><path d='${G.gota(67, 69, 5)}' fill='%235A3426' fill-opacity='.9'/></svg>`;
+  document.getElementById('padrao').style.background = `var(--caramelo-claro) url("data:image/svg+xml,${pad.replace(/#/g, '%23').replace(/"/g, "'")}") 0 0 / 90px 90px`;
+
+  // Ícones de destaque
+  const ICONES = {
+    'Cardápio': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="14" width="30" height="24" rx="4"/><path d="M9 20h30M15 20v5a2 2 0 004 0v-5M26 20v8a2 2 0 004 0v-8"/></svg>`,
+    'Como pedir': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M8 12h32v20H22l-8 7v-7H8z"/><path d="${G.coracao(24, 22.5, 0.95)}" fill="currentColor" stroke="none"/></svg>`,
+    'Clientes': `<svg viewBox="0 0 48 48" fill="currentColor"><path d="M10 30c0-8 4-13 10-15l1 3c-3 1.5-5 4-5 7h4v9h-10zM26 30c0-8 4-13 10-15l1 3c-3 1.5-5 4-5 7h4v9h-10z"/></svg>`,
+    'Bastidores': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M24 30v12"/><path d="M24 30c-8 0-10-10-10-14s4-9 10-9 10 5 10 9-2 14-10 14z"/><path d="M24 30c-4 0-5-10-5-14s2-9 5-9 5 5 5 9-1 14-5 14z"/></svg>`,
+    'Parcerias': `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M24 6l4.5 4 6-.6 1.6 5.8 5.2 3-2.4 5.5 2.4 5.5-5.2 3-1.6 5.8-6-.6L24 42l-4.5-4-6 .6-1.6-5.8-5.2-3 2.4-5.5-2.4-5.5 5.2-3 1.6-5.8 6 .6z"/><path d="${G.coracao(24, 24.5, 1.1)}" fill="currentColor" stroke="none"/></svg>`,
+  };
+  const destaques = Object.entries(ICONES).map(([n, svg]) => `<div class="destaque"><div class="bola">${svg}</div>${n}</div>`).join('');
+  document.getElementById('icones').innerHTML = destaques;
+  document.getElementById('igDest').innerHTML = destaques;
+
+  // Bio
+  document.getElementById('bio').innerHTML = `<b>${B.nome} | ${B.complemento}</b>${B.promessa} ${B.emoji}
+🎥 Rotina de uma confeiteira empreendedora
+📍 ${B.cidades} - ${B.uf}
+📩 Parcerias via direct
+👇 Peça o seu aqui
+<span style="color:#00376b">linktr.ee/layannysalezia</span>`;
+
+  /* ---------- Cores e contraste (lidos do tokens.css) ---------- */
+  const root = getComputedStyle(document.documentElement);
+  const tok = (n) => root.getPropertyValue(n).trim();
+  const CORES = [
+    ['Chocolate', '--chocolate', 'Cor principal. Logo, títulos e textos.'],
+    ['Creme', '--creme', 'Fundo principal de quase tudo.'],
+    ['Caramelo', '--caramelo', 'O 🧡 da marca. Destaques, gotas, botões, etiquetas de "novo".'],
+    ['Ganache', '--ganache', 'Fundo escuro das peças de impacto e da abertura dos vídeos.'],
+    ['Cacau', '--cacau', 'Textos secundários e sombras.'],
+    ['Dourado', '--dourado', 'Acabamento: fios, selos, hot stamping. Nunca em texto pequeno.'],
+    ['Caramelo claro', '--caramelo-claro', 'Fundos de apoio, cartões e padrões.'],
+    ['Off-white', '--off-white', 'Cartões e respiro sobre o creme.'],
+    ['Caramelo texto', '--caramelo-texto', 'Caramelo escurecido para palavras em destaque sobre creme.'],
+  ];
+  const hex2rgb = (h) => h.replace('#', '').match(/../g).map((x) => parseInt(x, 16));
+  const lum = (h) => { const c = hex2rgb(h).map((v) => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; };
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + .05) / (y + .05); };
+  const cmyk = (h) => { const [r, g, b] = hex2rgb(h).map((v) => v / 255); const k = 1 - Math.max(r, g, b); if (k === 1) return '0 0 0 100'; return [r, g, b].map((v) => Math.round((1 - v - k) / (1 - k) * 100)).concat(Math.round(k * 100)).join(' '); };
+
+  document.getElementById('cores-lista').innerHTML = CORES.map(([nome, v, uso]) => {
+    const h = tok(v).toUpperCase();
+    const claro = lum(h) > .35;
+    return `<div class="cor"><div class="amostra" style="background:${h};color:${claro ? 'var(--chocolate)' : 'var(--creme)'}"><span>${v}</span><b>${nome}</b></div>
+      <dl><dt>HEX</dt><dd>${h}</dd><dt>RGB</dt><dd>${hex2rgb(h).join(' ')}</dd><dt>CMYK</dt><dd>${cmyk(h)} <span style="color:var(--cacau);font-weight:400">(aprox.)</span></dd><dd class="uso">${uso}</dd></dl></div>`;
+  }).join('');
+
+  const PARES = [['--chocolate', '--creme'], ['--creme', '--ganache'], ['--cacau', '--creme'], ['--caramelo-texto', '--creme'], ['--ganache', '--caramelo'], ['--caramelo-claro', '--chocolate'], ['--dourado', '--ganache'], ['--caramelo', '--creme'], ['--dourado', '--creme']];
+  document.getElementById('contraste').innerHTML = PARES.map(([t, f]) => {
+    const r = ratio(tok(t), tok(f));
+    const [cls, txt] = r >= 4.5 ? ['sim', 'AA texto'] : r >= 3 ? ['meio', 'só título'] : ['nao', 'evitar'];
+    return `<tr><td><span class="exemplo" style="color:var(${t});background:var(${f})">Derrete na boca</span></td><td>${t.slice(2)} sobre ${f.slice(2)}</td><td style="font-variant-numeric:tabular-nums">${r.toFixed(1)}:1</td><td><span class="selo-ok ${cls}">${txt}</span></td></tr>`;
+  }).join('');
+
+  // Escala tipográfica
+  const ESCALA = [
+    ['Display · 144px', '--t-display', 'var(--fonte-titulo)', 'Lançamento'],
+    ['Título · 96px', '--t-titulo', 'var(--fonte-titulo)', 'Brownie de Ninho'],
+    ['Subtítulo · 64px', '--t-subtitulo', 'var(--fonte-titulo)', 'Pronta entrega hoje'],
+    ['Texto · 48px', '--t-texto', 'var(--fonte-texto)', 'Encomendas com 2 dias de antecedência'],
+    ['Legenda · 40px', '--t-legenda', 'var(--fonte-texto)', 'Itacajá e Palmas · peça pelo link da bio'],
+  ];
+  document.getElementById('escala').innerHTML = ESCALA.map(([n, v, f, ex]) =>
+    `<li><span>${n}</span><span style="font-family:${f};font-size:calc(var(${v}) / 3);font-variation-settings:var(--titulo-variacao);line-height:1.2">${ex}</span></li>`).join('');
+
+  // Curvas de motion
+  document.querySelectorAll('.bolinha').forEach((b, i) => {
+    b.animate([{ left: '0%' }, { left: 'calc(100% - 16px)' }], { duration: 1600, delay: i * 200, iterations: Infinity, direction: 'alternate', easing: tok(b.dataset.ease), endDelay: 400 });
+  });
+
+  /* ---------- Início ---------- */
+  let inicial = 'A';
+  try { inicial = new URLSearchParams(location.search).get('p') || localStorage.getItem('ls-proposta') || 'A'; } catch (e) {}
+  document.addEventListener('DOMContentLoaded', () => document.fonts.ready.then(() => aplicarProposta(inicial)));
+})();
+</script>
+</body>
+</html>

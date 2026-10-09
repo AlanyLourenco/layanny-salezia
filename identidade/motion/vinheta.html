@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Vinheta · logo</title>
+<link rel="stylesheet" href="../tokens.css">
+<script src="../logo/ls-logo.js"></script>
+<script src="../brand.js"></script>
+<script src="logo-motion.js"></script>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; color: var(--creme); font-family: var(--fonte-texto);
+    background: radial-gradient(110% 70% at 50% 42%, var(--principal-claro) 0%, var(--principal) 48%, var(--principal-escuro) 100%); }
+  .logo { position: absolute; left: 140px; width: 800px; top: 520px; }
+  .fim { position: absolute; left: 0; right: 0; top: 1430px; text-align: center; opacity: 0; }
+  .fim .s { font: 400 96px/1 var(--fonte-assinatura); color: var(--dourado-claro); }
+  .fim .a { font: 500 40px var(--fonte-texto); letter-spacing: .24em; margin-top: 34px; opacity: .85; }
+  .po { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--dourado-claro); opacity: 0; }
+</style>
+</head>
+<body>
+  <div class="logo logo--ouro" data-logo="vertical" data-local id="logo"></div>
+  <div class="fim" id="fim"><div class="s">derrete na boca 🧡</div><div class="a" data-brand="instagram"></div></div>
+  <div id="po"></div>
+<script>
+  /* Vinheta de 5,5 s (abertura/fim de reels).
+     ?modo=export → não toca sozinha; o script de vídeo chama VINHETA.seek(ms) quadro a quadro. */
+  const DURACAO = 5500;
+  function montar() {
+    // poeira dourada determinística (mesmo resultado em todo export)
+    let s = 7; const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    const po = document.getElementById('po');
+    po.innerHTML = Array.from({ length: 40 }, () => `<i class="po" style="left:${r() * 1080}px;top:${300 + r() * 1400}px"></i>`).join('');
+    [...po.children].forEach((el, i) => el.animate([
+      { opacity: 0, transform: 'translateY(0) scale(.4)' },
+      { opacity: .9, offset: .4 },
+      { opacity: 0, transform: `translateY(${-60 - r() * 80}px) scale(1)` },
+    ], { delay: 600 + r() * 3600, duration: 1800 + r() * 1200, fill: 'both', easing: 'ease-out' }));
+    document.getElementById('fim').animate([
+      { opacity: 0, transform: 'translateY(30px)', filter: 'blur(6px)' },
+      { opacity: 1, transform: 'none', filter: 'blur(0)' },
+    ], { delay: 3900, duration: 1100, fill: 'both', easing: 'cubic-bezier(.16,1,.3,1)' });
+  }
+  window.VINHETA = {
+    duracao: DURACAO,
+    async pronto() {
+      await document.fonts.ready;
+      montar();
+      LSMotion.play(document.getElementById('logo'));
+      if (new URLSearchParams(location.search).get('modo') === 'export') this.seek(0);
+    },
+    seek(ms) {
+      document.getAnimations().forEach((a) => { a.pause(); a.currentTime = ms; });
+    },
+  };
+  document.addEventListener('DOMContentLoaded', () => VINHETA.pronto());
+</script>
+</body>
+</html>

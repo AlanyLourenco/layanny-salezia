@@ -1,0 +1,108 @@
+/* ==========================================================
+   tokens.css — Layanny Salezia Confeitaria
+   Fonte única de cores, fontes, espaçamentos e motion.
+   Mudou aqui, muda em todas as peças.
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Gilda+Display&family=Pinyon+Script&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Allura&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap');
+
+/* Fraunces fixa (opsz 144, wght 300, SOFT 50) para o monograma:
+   dentro de SVG o Chrome ignora o eixo opsz, então usamos uma instância estática. */
+@font-face { font-family: 'LS Monograma'; font-style: normal; font-weight: 300; src: url('fonts/fraunces-monograma.woff2') format('woff2'); }
+@font-face { font-family: 'LS Monograma'; font-style: italic; font-weight: 300; src: url('fonts/fraunces-monograma-italic.woff2') format('woff2'); }
+
+:root {
+  /* ---------- Paleta v2 (referências: creme, areia, rosa antigo, bordô + dourado do logo) ---------- */
+  --rosa-queimado:  #A04C57; /* PRINCIPAL (pedido da cliente): fundo de impacto, textos sobre creme */
+  --rosa-luz:       #BA6470; /* brilho dos gradientes e laterais sobre o rosa */
+  --rosa-noite:     #6E2833; /* borda escura dos gradientes, rodapés, fundos de reels */
+  --bordo:          #4D0E13; /* apoio escuro: sombras, detalhes, texto sobre rosa antigo */
+  --bordo-noite:    #2E080B; /* sombras muito escuras */
+  --creme:          #EEE4DA; /* fundo principal */
+  --off-white:      #FAF6F0; /* cartões, respiro */
+  --areia:          #D8C4AC; /* apoio neutro, kraft, divisórias */
+  --rosa-antigo:    #C8A49F; /* toque afetivo: feedbacks, etiquetas */
+  --rosa-texto:     #8E5650; /* rosa antigo escurecido para texto (AA sobre creme) */
+  --dourado:        #B5832A; /* o ouro do logo */
+  --dourado-claro:  #E8C77E; /* brilho do foil, texto dourado sobre bordô */
+  --dourado-texto:  #83580F; /* dourado escurecido para texto sobre creme (AA) */
+
+  /* ---------- Paleta v1 (mantida só para as páginas antigas) ---------- */
+  --ganache:        #24130D;
+  --chocolate:      #3B2218;
+  --cacau:          #5A3426;
+  --caramelo:       #E27A3F;
+  --caramelo-texto: #A94F1F;
+  --caramelo-claro: #F4B184;
+  --rosa:           #E0336F;
+  --rosa-claro:     #F8CFDD;
+  --kraft:          #C9A57E;
+
+  /* ---------- Papéis (use estes nas peças) ----------
+     Trocar a cor principal = mudar só estas três linhas. */
+  --principal:        var(--rosa-queimado);
+  --principal-claro:  var(--rosa-luz);
+  --principal-escuro: var(--rosa-noite);
+
+  --fundo:          var(--creme);
+  --fundo-cartao:   var(--off-white);
+  --tinta:          var(--principal);
+  --tinta-suave:    #6B4A44;
+  --destaque:       var(--dourado);
+  --acabamento:     var(--dourado);
+
+  --fundo-escuro:   var(--principal);
+  --tinta-escuro:   var(--creme);
+
+  /* Foil dourado (tirado do logo) */
+  --foil: linear-gradient(120deg, #8C5E16 0%, #C8952E 22%, #F0D38A 40%, #B98528 58%, #E6BF6A 76%, #8F6017 100%);
+
+  /* ---------- Tipografia ---------- */
+  --fonte-assinatura: 'Pinyon Script', 'Allura', cursive;
+  --fonte-titulo:     'Gilda Display', 'Playfair Display', Georgia, serif;
+  --fonte-texto:      'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --fonte-monograma:  'LS Monograma', 'Fraunces', Georgia, serif;
+
+  --titulo-variacao: normal;
+
+  /* Escala para peças de 1080px (mínimo de leitura no celular: 40px) */
+  --t-legenda:   40px;
+  --t-texto:     48px;
+  --t-subtitulo: 64px;
+  --t-titulo:    96px;
+  --t-display:   144px;
+
+  /* ---------- Espaçamento (base 8) ---------- */
+  --e-1: 8px;  --e-2: 16px; --e-3: 24px; --e-4: 32px;
+  --e-6: 48px; --e-8: 64px; --e-12: 96px; --e-16: 128px;
+
+  /* Margem segura das peças de Instagram */
+  --margem-peca: 80px;
+
+  /* ---------- Formas ---------- */
+  --raio-p: 12px;
+  --raio-m: 24px;
+  --raio-g: 48px;
+
+  /* ---------- Motion: "viscoso" ---------- */
+  --ease-derrete: cubic-bezier(.65, 0, .35, 1);     /* entra e sai devagar, como calda */
+  --ease-pinga:   cubic-bezier(.55, 0, .9, .45);    /* acelera caindo (gota) */
+  --ease-assenta: cubic-bezier(.16, 1, .3, 1);       /* chega rápido e assenta devagar (ease-out expo) */
+  --dur-rapida: 300ms;
+  --dur-media:  700ms;
+  --dur-lenta:  1400ms;
+}
+
+/* ---------- Variantes de cor do logo ----------
+   --logo-tinta: letras | --logo-doce: brownie | --logo-acento: palavra cursiva | --logo-fundo: fundo */
+.logo--ouro       { --logo-tinta: url(#ls-foil); --logo-doce: url(#ls-foil); --logo-acento: url(#ls-foil); --logo-gota: url(#ls-foil); --logo-ouro: url(#ls-foil); --logo-fundo: var(--principal); }
+.logo--ouro-creme { --logo-tinta: url(#ls-foil); --logo-doce: url(#ls-foil); --logo-acento: url(#ls-foil); --logo-gota: url(#ls-foil); --logo-ouro: url(#ls-foil); --logo-fundo: var(--creme); }
+.logo--principal  { --logo-tinta: var(--principal); --logo-doce: var(--principal); --logo-acento: var(--dourado); --logo-gota: var(--principal); --logo-ouro: var(--dourado); --logo-fundo: var(--creme); }
+.logo--bordo      { --logo-tinta: var(--bordo);  --logo-doce: var(--bordo);  --logo-acento: var(--dourado); --logo-gota: var(--bordo); --logo-ouro: var(--dourado); --logo-fundo: var(--creme); }
+.logo--creme      { --logo-tinta: var(--creme);  --logo-doce: var(--creme);  --logo-acento: var(--dourado-claro); --logo-gota: var(--creme); --logo-ouro: var(--dourado-claro); --logo-fundo: var(--principal); }
+.logo--rosa       { --logo-tinta: var(--bordo);  --logo-doce: var(--bordo);  --logo-acento: var(--bordo); --logo-gota: var(--bordo); --logo-ouro: var(--bordo); --logo-fundo: var(--rosa-antigo); }
+.logo--mono       { --logo-tinta: currentColor;  --logo-doce: currentColor;  --logo-acento: currentColor; --logo-gota: currentColor; --logo-ouro: currentColor; --logo-fundo: var(--mono-fundo, var(--creme)); }
+/* v1 (páginas antigas) */
+.logo--claro  { --logo-tinta: var(--chocolate); --logo-gota: var(--caramelo); --logo-ouro: #C99A5B; --logo-fundo: #F7EDE0; }
+.logo--escuro { --logo-tinta: #F7EDE0; --logo-gota: var(--caramelo); --logo-ouro: #C99A5B; --logo-fundo: var(--ganache); }
+[data-logo] svg { display: block; width: 100%; height: auto; overflow: visible; }

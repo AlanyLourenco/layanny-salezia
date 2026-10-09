@@ -1,0 +1,45 @@
+rules_version = '2';
+// Regras do app de pedidos. Troque o e-mail abaixo pelo login da Layanny (pode ter mais de um).
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function admin() {
+      return request.auth != null && request.auth.token.email in ['TROCAR-PELO-EMAIL@DA-LAYANNY.com'];
+    }
+    function lojaAberta() {
+      return get(/databases/$(db)/documents/config/loja).data.aberta == true;
+    }
+
+    // Cardápio e configuração: todo mundo lê, só a Layanny escreve
+    match /produtos/{id} { allow read: if true; allow write: if admin(); }
+    match /config/{id}   { allow read: if true; allow write: if admin(); }
+
+    // Estoque do dia: o cliente só pode aumentar "vendidos" (reserva), sem passar do total
+    match /hoje/{id} {
+      allow read: if true;
+      allow write: if admin();
+      allow update: if lojaAberta()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['vendidos'])
+        && request.resource.data.vendidos > resource.data.vendidos
+        && request.resource.data.vendidos <= resource.data.qtd;
+    }
+
+    // Pedidos: o cliente cria e acompanha o seu pelo id (aleatório, funciona como senha).
+    // Listar, alterar e apagar: só a Layanny.
+    match /pedidos/{id} {
+      allow get: if true;
+      allow list, update, delete: if admin();
+      allow create: if lojaAberta()
+        && request.resource.data.keys().hasOnly(['codigo', 'cliente', 'itens', 'entrega', 'pagamento', 'obs', 'subtotal', 'total', 'status', 'pago', 'criadoEm'])
+        && request.resource.data.status == 'novo'
+        && request.resource.data.pago == false
+        && request.resource.data.criadoEm == request.time
+        && request.resource.data.itens is list
+        && request.resource.data.itens.size() > 0
+        && request.resource.data.itens.size() <= 30
+        && request.resource.data.total is int
+        && request.resource.data.cliente.nome is string
+        && request.resource.data.cliente.nome.size() <= 80
+        && request.resource.data.obs.size() <= 500;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "layanny-salezia-pedidos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pedidos Layanny Salezia Confeitaria: painel da Layanny e cardápio do cliente",
+  "scripts": {
+    "marca": "node scripts/sync-marca.js",
+    "dev": "node scripts/sync-marca.js && node scripts/servidor.js",
+    "deploy": "node scripts/sync-marca.js && vercel --prod",
+    "regras": "firebase deploy --only firestore"
+  }
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propostas de Logo</title>
+<link rel="stylesheet" href="../tokens.css">
+<script src="../brand.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--creme); color: var(--chocolate); font-family: var(--fonte-texto); padding: 56px 16px 80px; }
+  .topo { max-width: 1280px; margin: 0 auto 48px; display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+  .topo h1 { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-weight: 400; font-size: clamp(36px, 5vw, 64px); line-height: 1; letter-spacing: -.01em; }
+  .topo h1 em { color: var(--caramelo-texto); }
+  .topo p { max-width: 420px; color: var(--cacau); line-height: 1.5; }
+  .grade { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1000px) { .grade { grid-template-columns: 1fr; max-width: 560px; } }
+  .prop { background: var(--off-white); border-radius: var(--raio-m); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 0 rgba(59,34,24,.06), 0 20px 40px -24px rgba(59,34,24,.25); }
+  .prop header { padding: 24px 28px 0; display: flex; gap: 14px; align-items: baseline; }
+  .letra { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-size: 44px; font-style: italic; color: var(--caramelo-texto); line-height: 1; }
+  .prop h2 { font-family: var(--fonte-titulo); font-variation-settings: var(--titulo-variacao); font-weight: 500; font-size: 26px; }
+  .ideia { padding: 8px 28px 0; color: var(--cacau); line-height: 1.5; font-size: 15px; min-height: 70px; }
+  .palco { margin: 20px 20px 0; border-radius: var(--raio-p); background: var(--creme); aspect-ratio: 1 / 1; display: grid; place-items: center; padding: 36px; }
+  .palco > div { width: 100%; }
+  .palco.alto > div { width: 78%; }
+  .vars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 20px 20px; }
+  .var { aspect-ratio: 1; border-radius: var(--raio-p); display: grid; place-items: center; padding: 14px; position: relative; }
+  .var > div { width: 100%; }
+  .var span { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+  .v-escuro { background: var(--ganache); color: var(--creme); }
+  .v-mono { background: var(--creme); color: var(--chocolate); }
+  .v-ouro { background: var(--chocolate); color: var(--creme); }
+  .perfil { background: var(--creme); }
+  .perfil .circ { width: 78%; aspect-ratio: 1; border-radius: 50%; background: var(--chocolate); display: grid; place-items: center; overflow: hidden; }
+  .perfil .circ > div { width: 62%; }
+  .perfil span { color: var(--cacau); }
+  .rodape { max-width: 1280px; margin: 40px auto 0; color: var(--cacau); font-size: 14px; line-height: 1.6; }
+</style>
+</head>
+<body>
+  <div class="topo">
+    <h1>Três caminhos para <em>derreter</em><br>a marca nova</h1>
+    <p>Propostas de logo para <strong data-brand="nomeCompleto"></strong>. Cada uma mostra a versão principal, o modo escuro, a versão dourada para embalagem e como fica na foto de perfil.</p>
+  </div>
+
+  <div class="grade">
+    <article class="prop">
+      <header><span class="letra">A</span><h2>Monograma</h2></header>
+      <p class="ideia">O LS entrelaçado da referência, refeito em serifa macia: um fio de calda abraça as letras e deixa cair uma gota caramelo.</p>
+      <div class="palco alto"><div data-logo="monograma" data-com-nome class="logo--claro"></div></div>
+      <div class="vars">
+        <div class="var v-escuro"><div data-logo="monograma" class="logo--escuro"></div><span>escuro</span></div>
+        <div class="var v-ouro"><div data-logo="monograma" class="logo--ouro"></div><span>dourado</span></div>
+        <div class="var perfil"><div class="circ"><div data-logo="monograma" class="logo--escuro"></div></div><span>perfil</span></div>
+      </div>
+    </article>
+
+    <article class="prop">
+      <header><span class="letra">B</span><h2>Assinatura</h2></header>
+      <p class="ideia">A pessoa é a marca: o nome dela escrito à mão, e o traço embaixo vira calda de caramelo escorrendo.</p>
+      <div class="palco"><div data-logo="assinatura" class="logo--claro"></div></div>
+      <div class="vars">
+        <div class="var v-escuro"><div data-logo="assinatura" class="logo--escuro"></div><span>escuro</span></div>
+        <div class="var v-ouro"><div data-logo="assinatura" data-curta class="logo--ouro"></div><span>dourado</span></div>
+        <div class="var perfil"><div class="circ"><div data-logo="assinatura" data-curta class="logo--escuro" style="width:90%"></div></div><span>perfil</span></div>
+      </div>
+    </article>
+
+    <article class="prop">
+      <header><span class="letra">C</span><h2>Selo</h2></header>
+      <p class="ideia">Um carimbo de confeitaria: o anel de chocolate derrete para dentro do selo, pronto para adesivo, caixa e sacola kraft.</p>
+      <div class="palco alto"><div data-logo="selo" class="logo--claro"></div></div>
+      <div class="vars">
+        <div class="var v-escuro"><div data-logo="selo" class="logo--escuro"></div><span>escuro</span></div>
+        <div class="var v-ouro"><div data-logo="selo" class="logo--ouro"></div><span>dourado</span></div>
+        <div class="var perfil"><div class="circ" style="background:none"><div data-logo="selo" data-reduzido class="logo--claro" style="width:100%"></div></div><span>perfil</span></div>
+      </div>
+    </article>
+  </div>
+
+  <p class="rodape">As três usam a mesma paleta e as mesmas fontes (Fraunces, Allura e DM Sans), e dá para combinar: por exemplo, a assinatura B como logo principal e o selo C nas embalagens.</p>
+</body>
+</html>

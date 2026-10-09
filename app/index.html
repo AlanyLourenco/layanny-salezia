@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Layanny Salezia Confeitaria · Faça seu pedido</title>
+<meta name="description" content="Brownies artesanais que derretem na boca. Veja o que tem hoje e faça seu pedido.">
+<meta name="theme-color" content="#A04C57">
+<link rel="icon" type="image/png" href="marca/export/logo/monograma-ouro.png">
+<link rel="apple-touch-icon" href="marca/export/logo/monograma-ouro.png">
+<link rel="stylesheet" href="marca/tokens.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/cliente.css">
+<script src="marca/logo/ls-logo.js"></script>
+<script src="marca/brand.js"></script>
+<script src="marca/motion/logo-motion.js"></script>
+</head>
+<body>
+
+<!-- ============ Abertura ============ -->
+<div class="abertura" id="abertura" aria-hidden="true">
+  <div class="abertura-logo logo--ouro" data-logo="oficial"></div>
+  <p class="abertura-nome" data-brand="nome"></p>
+  <p class="abertura-comp script" data-brand="complemento"></p>
+  <div class="abertura-pe">
+    <p>Brownies artesanais<br>que derretem na boca</p>
+    <div class="carregando"><span></span></div>
+  </div>
+</div>
+
+<div class="faixa-demo" id="faixa-demo" hidden>Modo demonstração: os pedidos ficam só neste navegador.</div>
+
+<!-- ============ Início ============ -->
+<div class="tela" id="tela-inicio">
+  <header class="topo-app">
+    <span class="status-pill" id="status-pill"><i></i><span>…</span></span>
+    <div class="marca-topo" aria-label="Layanny Salezia Confeitaria">
+      <span class="marca-nome" data-brand="nome"></span>
+      <span class="marca-comp script" data-brand="complemento"></span>
+    </div>
+    <button class="icone-btn sacola-btn" data-ir="pedido" aria-label="Ver meu pedido"><span data-i="sacola"></span><b class="badge" id="badge" hidden>0</b></button>
+  </header>
+
+  <main class="wrap">
+    <section class="saudacao">
+      <h1 id="saudacao">Olá!</h1>
+      <p>O que vai <em class="script">derreter</em> hoje?</p>
+    </section>
+
+    <a class="lembrete" id="ultimo-pedido" hidden></a>
+
+    <section class="hero" id="hero">
+      <div class="hero-txt">
+        <h2 id="hero-titulo">Derrete<br>na boca</h2>
+        <p id="hero-sub"></p>
+        <a class="btn creme peq" id="hero-btn" href="#cardapio">Ver cardápio</a>
+      </div>
+      <div class="hero-arco" id="hero-arco"></div>
+      <svg class="hero-calda" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0h400v8c-26 0-30 6-48 6-14 0-14 14-21 14s-7-12-19-12c-22 0-30-6-58-6-16 0-17 9-24 9s-8-9-20-9c-30 0-40 7-70 7-14 0-14 12-21 12s-8-11-19-11C70 18 40 8 0 8Z"/></svg>
+    </section>
+
+    <p class="aviso" id="aviso" hidden></p>
+
+    <section id="cardapio" aria-labelledby="t-cardapio">
+      <div class="cab-secao">
+        <h2 id="t-cardapio">Cardápio de <span class="script">hoje</span></h2>
+        <span class="mini suave" id="n-itens"></span>
+      </div>
+      <ul class="grade" id="grade"></ul>
+    </section>
+
+
+    <a class="marca-cartao" id="marca-cartao" target="_blank" rel="noopener">
+      <span class="marca-cartao-ic" data-i="coracao"></span>
+      <span><b>Feito à mão, do jeitinho da Lalá</b><small>Bastidores e novidades no Instagram</small></span>
+      <span class="marca-cartao-seta" data-i="seta"></span>
+    </a>
+    <footer class="rodape">
+      <p><span data-brand="nomeCompleto"></span> · Itacajá – TO</p>
+      <p>Identidade visual e site: produção de Alany Gabriely · 2026</p>
+    </footer>
+  </main>
+
+  <div class="barra-pedido" id="barra-pedido" hidden>
+    <button class="btn cheio" data-ir="pedido">
+      <span class="barra-ic" data-i="sacola"></span>
+      <span class="barra-txt"><b>Ver meu pedido</b><small id="barra-itens"></small></span>
+      <span class="barra-total" id="barra-total"></span>
+    </button>
+  </div>
+</div>
+
+<!-- ============ Ficha do produto ============ -->
+<dialog class="ficha" id="ficha" aria-labelledby="ficha-nome">
+  <div class="ficha-foto" id="ficha-foto"></div>
+  <button class="icone-btn ficha-fechar" id="ficha-fechar" aria-label="Fechar"><span data-i="fechar"></span></button>
+  <div class="ficha-corpo">
+    <div class="ficha-cab">
+      <h2 id="ficha-nome"></h2>
+      <span class="ficha-preco" id="ficha-preco"></span>
+    </div>
+    <p class="ficha-resta" id="ficha-resta"></p>
+    <p class="ficha-desc" id="ficha-desc"></p>
+    <div class="ficha-acoes">
+      <div class="qtd grande" role="group" aria-label="Quantidade">
+        <button type="button" id="ficha-menos" aria-label="Tirar um"><span data-i="menos"></span></button>
+        <output id="ficha-qtd" aria-live="polite">1</output>
+        <button type="button" id="ficha-mais" aria-label="Pôr mais um"><span data-i="mais"></span></button>
+      </div>
+      <button class="btn cheio" id="ficha-add"></button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ============ Finalizar ============ -->
+<div class="tela" id="tela-pedido" hidden>
+  <header class="topo-app topo-interno">
+    <button class="icone-btn" data-voltar aria-label="Voltar"><span data-i="voltar"></span></button>
+    <h1>Finalizar pedido</h1>
+    <span class="icone-btn fantasma"></span>
+  </header>
+
+  <form class="wrap" id="form-pedido" novalidate>
+    <section class="bloco">
+      <div class="bloco-cab"><h2>Seu pedido</h2><button type="button" class="link" data-voltar>+ Adicionar mais</button></div>
+      <ul class="itens" id="itens-pedido"></ul>
+    </section>
+
+    <section class="bloco">
+      <h2>Como receber</h2>
+      <div class="linhas-op" role="radiogroup" aria-label="Retirada ou entrega">
+        <label class="linha-op"><input type="radio" name="tipo" value="retirada" checked>
+          <span class="op-ic" data-i="loja"></span>
+          <span class="op-txt"><b>Retirar com a Layanny</b><small id="sub-retirada">combine o local pelo WhatsApp</small></span>
+          <span class="op-radio"></span></label>
+        <label class="linha-op"><input type="radio" name="tipo" value="entrega">
+          <span class="op-ic" data-i="moto"></span>
+          <span class="op-txt"><b>Entrega grátis</b><small id="sub-entrega"></small></span>
+          <span class="op-radio"></span></label>
+      </div>
+      <p class="dica-entrega" id="dica-entrega" hidden></p>
+      <div class="sub-campos" id="campos-entrega" hidden>
+        <label class="campo"><span>Endereço</span><input class="input" name="endereco" autocomplete="street-address" placeholder="Rua e número"></label>
+        <label class="campo"><span>Bairro</span><input class="input" name="bairro" autocomplete="address-level3"></label>
+        <label class="campo"><span>Complemento ou referência <small>(opcional)</small></span><input class="input" name="complemento" placeholder="Casa amarela, perto da praça…"></label>
+      </div>
+    </section>
+
+    <section class="bloco">
+      <h2>Seus dados</h2>
+      <label class="campo"><span>Nome</span><input class="input" name="nome" autocomplete="name" required maxlength="80"></label>
+      <label class="campo"><span>WhatsApp</span><input class="input" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(63) 99999-9999" required></label>
+    </section>
+
+    <section class="bloco">
+      <h2>Pagamento</h2>
+      <div class="linhas-op" role="radiogroup" aria-label="Forma de pagamento">
+        <label class="linha-op"><input type="radio" name="pagamento" value="pix" checked>
+          <span class="op-ic" data-i="pix"></span><span class="op-txt"><b>Pix agora</b><small>a chave aparece no próximo passo</small></span><span class="op-radio"></span></label>
+        <label class="linha-op"><input type="radio" name="pagamento" value="pixEntrega">
+          <span class="op-ic" data-i="pix"></span><span class="op-txt"><b>Pix <span class="quando">na retirada</span></b><small>paga quando receber</small></span><span class="op-radio"></span></label>
+        <label class="linha-op"><input type="radio" name="pagamento" value="cartao">
+          <span class="op-ic" data-i="cartao"></span><span class="op-txt"><b>Cartão <span class="quando">na retirada</span></b><small>débito ou crédito</small></span><span class="op-radio"></span></label>
+        <label class="linha-op"><input type="radio" name="pagamento" value="dinheiro">
+          <span class="op-ic" data-i="dinheiro"></span><span class="op-txt"><b>Dinheiro <span class="quando">na retirada</span></b><small>avise se precisa de troco</small></span><span class="op-radio"></span></label>
+      </div>
+      <label class="campo sub-campos" id="campo-troco" hidden><span>Troco para quanto? <small>(vazio se não precisar)</small></span><input class="input" name="troco" inputmode="decimal" placeholder="R$ 50,00"></label>
+    </section>
+
+    <section class="bloco">
+      <label class="campo"><span>Observação <small>(opcional)</small></span><textarea class="input" name="obs" maxlength="500" placeholder="É presente? Quer um bilhetinho? Conta aqui."></textarea></label>
+    </section>
+
+    <section class="resumo">
+      <div><span>Subtotal</span><span id="r-subtotal"></span></div>
+      <div id="r-linha-taxa" hidden><span>Entrega</span><span>Grátis</span></div>
+      <div class="total"><span>Total</span><span id="r-total"></span></div>
+    </section>
+
+    <p class="erro" id="erro-pedido" role="alert" hidden></p>
+    <button class="btn cheio grande dividido" id="enviar" type="submit"><span>Fazer pedido</span><span id="enviar-total"></span></button>
+    <p class="nota-segura"><span data-i="cadeado"></span>A Layanny confirma seu pedido pelo WhatsApp</p>
+  </form>
+</div>
+
+<!-- ============ Acompanhar ============ -->
+<div class="tela" id="tela-acompanhar" hidden>
+  <header class="topo-app topo-interno">
+    <button class="icone-btn" id="a-voltar" aria-label="Voltar ao cardápio"><span data-i="voltar"></span></button>
+    <h1>Seu pedido</h1>
+    <span class="icone-btn fantasma"></span>
+  </header>
+  <main class="wrap">
+    <section class="status-cartao">
+      <div>
+        <span class="rotulo-claro">Pedido <b id="a-codigo"></b></span>
+        <p class="status-txt" id="a-status" aria-live="polite"></p>
+        <p class="status-sub" id="a-sub"></p>
+      </div>
+      <div class="status-ic logo--ouro" data-logo="brownie"></div>
+    </section>
+
+    <ol class="passos" id="a-passos"></ol>
+
+    <a class="btn whats cheio grande" id="a-whats" target="_blank" rel="noopener"><span data-i="whats"></span><span>Enviar pedido no WhatsApp</span></a>
+
+    <section class="pix" id="a-pix" hidden>
+      <div class="pix-cab"><span class="op-ic" data-i="pix"></span><div><b>Pague com Pix</b><small id="a-pix-titular"></small></div><span class="pix-valor" id="a-pix-valor"></span></div>
+      <button type="button" class="chave" id="a-pix-chave"><span></span><small>toque para copiar a chave</small></button>
+      <p class="mini suave">Depois, mande o comprovante no WhatsApp.</p>
+    </section>
+
+    <section class="bloco">
+      <div class="bloco-cab"><h2>Detalhes</h2><span class="mini suave" id="a-hora"></span></div>
+      <ul class="itens leitura" id="a-itens"></ul>
+      <div class="resumo" id="a-resumo"></div>
+      <p class="a-dado" id="a-entrega"></p>
+      <p class="a-dado" id="a-pagamento"></p>
+    </section>
+
+    <a class="ajuda" id="a-ajuda" target="_blank" rel="noopener">
+      <span><b>Precisa de ajuda?</b><small>Fale direto com a Layanny</small></span>
+      <span class="ajuda-ic" data-i="whats"></span>
+    </a>
+    <button class="btn claro cheio" id="a-novo" type="button">Voltar ao cardápio</button>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<script type="module" src="js/cliente.js"></script>
+</body>
+</html>

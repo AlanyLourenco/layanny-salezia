@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-09T01:43:43.925Z",
+        "reason": "Brief do projeto (CLAUDE.md da identidade) define --creme como fundo principal da marca"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "painel/index.html"
+        ],
+        "createdAt": "2026-10-09T01:43:44.227Z",
+        "reason": "Brief do projeto (CLAUDE.md da identidade) define --creme como fundo principal da marca"
+      }
+    ]
+  }
+}

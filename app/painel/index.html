@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Painel · Layanny Salezia</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#A04C57">
+<link rel="icon" type="image/png" href="../marca/export/logo/monograma-ouro.png">
+<link rel="apple-touch-icon" href="../marca/export/logo/monograma-ouro.png">
+<link rel="stylesheet" href="../marca/tokens.css">
+<link rel="stylesheet" href="../css/app.css">
+<!-- componentes compartilhados com a página do cliente (topo, cartões, ficha, rodapé) -->
+<link rel="stylesheet" href="../css/cliente.css">
+<link rel="stylesheet" href="../css/painel.css">
+<script src="../marca/logo/ls-logo.js"></script>
+<script src="../marca/brand.js"></script>
+<script src="../marca/motion/logo-motion.js"></script>
+</head>
+<body>
+<div class="faixa-demo" id="faixa-demo" hidden>Modo demonstração: abra o cardápio em outra aba para ver os dois ligados.</div>
+
+<!-- ============ Login ============ -->
+<section class="login" id="tela-login" hidden>
+  <div class="login-marca">
+    <div class="login-logo logo--ouro" data-logo="oficial"></div>
+    <p class="abertura-nome" data-brand="nome"></p>
+    <p class="login-sub script">Painel da confeiteira</p>
+  </div>
+  <form class="login-form" id="form-login">
+    <label class="campo"><span>E-mail</span><input class="input" name="email" type="email" autocomplete="username" required></label>
+    <label class="campo"><span>Senha</span><input class="input" name="senha" type="password" autocomplete="current-password" required></label>
+    <p class="erro" id="erro-login" role="alert" hidden></p>
+    <button class="btn cheio grande">Entrar</button>
+  </form>
+  <p class="login-credito">Produção de Alany Gabriely · 2026</p>
+</section>
+
+<!-- ============ Painel ============ -->
+<div id="tela-painel" hidden>
+  <header class="topo-app">
+    <button class="status-pill" id="status-loja" aria-label="Abrir ou fechar a loja"><i></i><span>Fechada</span></button>
+    <div class="marca-topo">
+      <span class="marca-nome" data-brand="nome"></span>
+      <span class="marca-comp script">Painel</span>
+    </div>
+    <a class="icone-btn" href="../" target="_blank" rel="noopener" aria-label="Ver o cardápio como cliente"><span data-i="olho"></span></a>
+  </header>
+
+  <main class="wrap conteudo">
+    <!-- ---------- Pedidos ---------- -->
+    <section class="aba" id="aba-pedidos">
+      <section class="hero hero-painel">
+        <div class="hp-topo">
+          <div>
+            <p class="hp-oi" id="saudacao"></p>
+            <p class="hp-data" id="data-hoje"></p>
+          </div>
+          <label class="interruptor" title="Abrir ou fechar a loja para pedidos">
+            <input type="checkbox" id="loja-aberta">
+            <span class="trilho"><span class="bola"></span></span>
+            <span class="interruptor-txt" id="loja-aberta-txt">Fechada</span>
+          </label>
+        </div>
+        <div class="numeros">
+          <div><b id="n-pedidos">0</b><span>pedidos hoje</span></div>
+          <div><b id="n-faturado">R$ 0</b><span>vendido hoje</span></div>
+          <div><b id="n-estoque">0</b><span>no estoque</span></div>
+        </div>
+        <svg class="hero-calda" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0h400v8c-26 0-30 6-48 6-14 0-14 14-21 14s-7-12-19-12c-22 0-30-6-58-6-16 0-17 9-24 9s-8-9-20-9c-30 0-40 7-70 7-14 0-14 12-21 12s-8-11-19-11C70 18 40 8 0 8Z"/></svg>
+      </section>
+
+      <button class="aviso-som" id="ativar-som" type="button">
+        <span class="op-ic" data-i="sino"></span>
+        <span class="op-txt"><b>Ativar som de pedido novo</b><small>Toque uma vez sempre que abrir o painel</small></span>
+      </button>
+
+      <div class="segmento" role="tablist" aria-label="Filtrar pedidos">
+        <label><input type="radio" name="filtro" value="ativos" checked><span>Em andamento <em class="contador" id="n-ativos">0</em></span></label>
+        <label><input type="radio" name="filtro" value="concluidos"><span>Concluídos</span></label>
+      </div>
+      <ul class="pedidos" id="lista-pedidos"></ul>
+      <div class="vazio-painel" id="sem-pedidos" hidden>
+        <div class="vazio-ic logo--principal" data-logo="brownie"></div>
+        <p id="sem-pedidos-txt">Nenhum pedido por aqui ainda.</p>
+      </div>
+    </section>
+
+    <!-- ---------- Hoje ---------- -->
+    <section class="aba" id="aba-hoje" hidden>
+      <div class="cab-secao"><h2>O que tem <span class="script">hoje</span></h2></div>
+      <p class="suave intro">Marque o que saiu do forno e quantas unidades. O cardápio do cliente muda na hora.</p>
+      <div class="cartao-p">
+        <div class="linha2">
+          <label class="campo"><span>Pedidos até</span><input class="input" type="time" id="hoje-ate"></label>
+          <label class="campo"><span>Entregas a partir de</span><input class="input" type="time" id="hoje-entrega"></label>
+        </div>
+        <label class="campo"><span>Recado no cardápio <small>(opcional)</small></span><input class="input" id="hoje-aviso" maxlength="140" placeholder="Ex.: Fornada especial de Dia das Mães 🧡"></label>
+      </div>
+      <ul class="itens dia" id="lista-dia"></ul>
+      <div class="vazio-painel" id="sem-produtos" hidden><p>Cadastre seus produtos na aba <b>Produtos</b> primeiro.</p></div>
+      <div class="acoes-dia">
+        <button class="btn cheio grande" id="salvar-dia">Salvar o dia</button>
+        <button class="link" id="novo-dia" type="button">Começar dia novo (zera os vendidos)</button>
+      </div>
+    </section>
+
+    <!-- ---------- Produtos ---------- -->
+    <section class="aba" id="aba-produtos" hidden>
+      <div class="cab-secao"><h2>Seus <span class="script">doces</span></h2><span class="mini suave" id="n-produtos"></span></div>
+      <ul class="grade" id="lista-catalogo"></ul>
+    </section>
+
+    <!-- ---------- Ajustes ---------- -->
+    <section class="aba" id="aba-ajustes" hidden>
+      <div class="cab-secao"><h2>Ajustes</h2></div>
+      <form id="form-ajustes">
+        <div class="cartao-p">
+          <h3><span data-i="whats"></span>Contato</h3>
+          <label class="campo"><span>WhatsApp que recebe os pedidos</span><input class="input" name="whatsapp" type="tel" inputmode="tel" placeholder="(63) 99202-0224"></label>
+        </div>
+        <div class="cartao-p">
+          <h3><span data-i="pix"></span>Pix</h3>
+          <label class="campo"><span>Chave Pix</span><input class="input" name="pixChave" placeholder="CPF, celular, e-mail ou chave aleatória"></label>
+          <label class="campo"><span>Nome que aparece no Pix</span><input class="input" name="pixTitular"></label>
+        </div>
+        <div class="cartao-p">
+          <h3><span data-i="moto"></span>Retirada e entrega</h3>
+          <label class="campo"><span>Onde retirar</span><input class="input" name="retirada" placeholder="Endereço ou 'combinar pelo WhatsApp'"></label>
+          <label class="campo"><span>Entrega grátis a partir de quantas unidades?</span><input class="input" name="entregaMinimo" type="number" inputmode="numeric" min="1" max="50"><small>Com menos que isso, o cliente só pode retirar. O horário das entregas fica na aba Hoje.</small></label>
+        </div>
+        <button class="btn cheio grande">Salvar ajustes</button>
+      </form>
+      <button class="btn claro cheio sair" id="sair"><span data-i="sair"></span>Sair do painel</button>
+      <footer class="rodape">
+        <p><span data-brand="nomeCompleto"></span> · Itacajá – TO</p>
+        <p>Identidade visual e site: produção de Alany Gabriely · 2026</p>
+      </footer>
+    </section>
+  </main>
+
+  <nav class="abas" aria-label="Seções">
+    <button data-aba="pedidos" class="on"><span data-i="sacola"></span>Pedidos<b class="ponto" id="ponto-novo" hidden></b></button>
+    <button data-aba="hoje"><span data-i="calendario"></span>Hoje</button>
+    <button data-aba="produtos"><span data-i="caixa"></span>Produtos</button>
+    <button data-aba="ajustes"><span data-i="ajustes"></span>Ajustes</button>
+  </nav>
+</div>
+
+<!-- ============ Editor de produto ============ -->
+<dialog class="ficha" id="editor" aria-labelledby="editor-titulo">
+  <form method="dialog" id="form-produto">
+    <label class="ficha-foto editor-foto">
+      <div class="editor-img" id="editor-foto"></div>
+      <span class="btn creme peq editor-trocar"><span data-i="camera"></span>Escolher foto</span>
+      <input type="file" accept="image/*" id="editor-arquivo" class="sr">
+    </label>
+    <button type="button" class="icone-btn ficha-fechar" id="editor-fechar" aria-label="Fechar"><span data-i="fechar"></span></button>
+    <div class="ficha-corpo">
+      <h2 id="editor-titulo" class="editor-titulo">Novo doce</h2>
+      <label class="campo"><span>Nome</span><input class="input" name="nome" required maxlength="60" placeholder="Brownie de Ninho"></label>
+      <label class="campo"><span>Descrição <small>(curtinha, aparece no cardápio)</small></span><textarea class="input" name="descricao" maxlength="160"></textarea></label>
+      <div class="linha2">
+        <label class="campo"><span>Preço</span><input class="input" name="preco" inputmode="decimal" placeholder="12,00" required></label>
+        <label class="campo"><span>No cardápio?</span><span class="interruptor claro"><input type="checkbox" name="ativo" checked><span class="trilho"><span class="bola"></span></span><span class="interruptor-txt">Ativo</span></span></label>
+      </div>
+      <div class="editor-acoes">
+        <button class="btn perigo" type="button" id="apagar-produto" hidden>Apagar</button>
+        <button class="btn grande" id="salvar-produto" value="salvar">Salvar</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+<script type="module" src="../js/painel.js"></script>
+</body>
+</html>

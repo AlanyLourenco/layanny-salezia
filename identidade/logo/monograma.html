@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monograma LS</title>
+<link rel="stylesheet" href="../tokens.css">
+<script src="ls-monograma.js"></script>
+<script src="../brand.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #fff; color: var(--chocolate); font-family: var(--fonte-texto); padding: 48px 16px 80px; }
+  .topo { max-width: 1240px; margin: 0 auto 40px; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+  .topo img { width: 110px; border-radius: 12px; border: 1px solid #eee; }
+  .topo h1 { font-family: var(--fonte-titulo); font-weight: 400; font-size: clamp(30px, 4vw, 48px); line-height: 1.15; }
+  .topo p { color: var(--cacau); margin-top: 6px; max-width: 620px; line-height: 1.5; }
+  .grade { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1000px) { .grade { grid-template-columns: 1fr; max-width: 520px; } }
+  .op { border: 1px solid #eee; border-radius: var(--raio-m); overflow: hidden; }
+  .op header { padding: 22px 24px 0; }
+  .op h2 { font-family: var(--fonte-titulo); font-weight: 500; font-size: 24px; }
+  .op h2 span { color: var(--rosa-texto); font-style: italic; margin-right: 8px; }
+  .op p { color: var(--cacau); font-size: 15px; line-height: 1.5; margin-top: 4px; min-height: 46px; }
+  .palco { margin: 16px; aspect-ratio: 3 / 4; display: grid; place-items: center; padding: 24px; background: #fff; }
+  .palco > div { width: 78%; }
+  .zoom { margin: 0 16px; border-radius: var(--raio-p); background: var(--creme); padding: 8px; }
+  .zoom svg { overflow: hidden; }
+  .vars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 16px 16px; }
+  .vars > div { aspect-ratio: 3 / 4; border-radius: 10px; display: grid; place-items: center; padding: 8px; }
+  .vars > div > div { width: 84%; }
+  .rotulo { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--cacau); margin: 0 16px 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; }
+  .rosa-doce { --ls-doce: var(--rosa); }
+</style>
+</head>
+<body>
+  <div class="topo">
+    <img src="../refs/adc443d5-96e6-40c6-8941-a84d620997eb.jpg" alt="Monograma original com borboleta">
+    <div>
+      <h1>Seu monograma, com um doce no lugar da borboleta</h1>
+      <p>As letras e o arco são o seu desenho, vetorizado sem mudar o traço. Só a borboleta foi trocada. Escolha o doce:</p>
+    </div>
+  </div>
+
+  <div class="grade" id="grade"></div>
+
+<script>
+  const M = window.LS_MONOGRAMA;
+  document.getElementById('grade').innerHTML = Object.entries(M.doces).map(([k, d], i) => `
+    <article class="op">
+      <header><h2><span>${'ABC'[i]}</span>${d.nome}</h2><p>${d.ideia}</p></header>
+      <div class="palco"><div data-logo="ls" data-doce="${k}" class="logo--ouro"></div></div>
+      <div class="zoom"><div data-logo="ls" data-zoom data-doce="${k}" class="logo--claro"></div></div>
+      <div class="vars">
+        <div style="background:var(--creme)"><div data-logo="ls" data-doce="${k}" class="logo--claro"></div></div>
+        <div style="background:var(--creme)"><div data-logo="ls" data-doce="${k}" class="logo--ouro rosa-doce"></div></div>
+        <div style="background:var(--chocolate)"><div data-logo="ls" data-doce="${k}" class="logo--ouro rosa-doce"></div></div>
+        <div style="background:var(--rosa)"><div data-logo="ls" data-doce="${k}" class="logo--escuro"></div></div>
+      </div>
+      <div class="rotulo"><span>chocolate</span><span>ouro + rosa</span><span>no escuro</span><span>no rosa</span></div>
+    </article>`).join('');
+</script>
+</body>
+</html>
